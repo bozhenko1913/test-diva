@@ -786,3 +786,15 @@ section { padding: 120px 0; text-align: center; border-bottom: 1px solid rgba(25
         margin-top: 20px;
     }
 }
+/* Стили для анимации появления */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+/* Класс, который будет добавляться скриптом при докрутке */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
