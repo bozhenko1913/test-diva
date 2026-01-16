@@ -95,7 +95,7 @@ nav a:hover { color: var(--accent-red); }
     align-items: center;
     justify-content: center;
     position: relative;
-    padding-top: 80px;
+    padding-top: 120px;
     text-align: center;
 }
 
@@ -770,4 +770,19 @@ section { padding: 120px 0; text-align: center; border-bottom: 1px solid rgba(25
     border-color: #ffffff;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     transform: translateY(-1px);
+}
+/* ДОБАВИТЬ В САМЫЙ КОНЕЦ style.css */
+
+@media (max-width: 768px) {
+    /* Поскольку меню на телефоне стало высоким (в столбик),
+       делаем большой отступ сверху для главного экрана */
+    .hero {
+        padding-top: 220px !important; /* Увеличили отступ, чтобы текст было видно */
+    }
+    
+    /* Можно немного уменьшить шрифт заголовка, чтобы он лучше влезал */
+    .hero h1 {
+        font-size: 2rem;
+        margin-top: 20px;
+    }
 }
