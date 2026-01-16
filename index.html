@@ -263,4 +263,27 @@
 
 </body>
 </html>
+<script>
+        function reveal() {
+            var reveals = document.querySelectorAll("section, .feature-card, .service-item, .blog-card");
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // Через сколько пикселей после появления края блока запускать анимацию
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        // Запускаем проверку при скролле
+        window.addEventListener("scroll", reveal);
+        
+        // Запускаем один раз при загрузке, чтобы показать первый экран
+        window.onload = reveal;
+    </script>
+</body>
+</html>
 
