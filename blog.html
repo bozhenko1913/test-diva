@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог | DIVA MODELS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body style="background-color: #050505;">
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">DIVA <span>MODELS</span></div>
+            <nav class="main-nav">
+                <a href="index.html#about">О нас</a>
+                <a href="index.html#features">Преимущества</a>
+                <a href="index.html#services">Услуги</a>
+                <a href="index.html" class="btn-pill">← На главную</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 150px; padding-bottom: 100px;">
+        <div class="container">
+            <div class="label" style="text-align: center;">JOURNAL</div>
+            <h1 class="section-title" style="text-align: center; margin-bottom: 60px;">
+                ВСЕ <span class="text-red">СТАТЬИ</span>
+            </h1>
+            
+            <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                
+                <article class="blog-card active">
+                    <div class="blog-date">16 ЯНВ 2026</div>
+                    <h3>Агентство или Соло?</h3>
+                    <p>Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков.</p>
+                    <a href="article1.html" class="blog-link">Читать полностью →</a>
+                </article>
+
+                <article class="blog-card active">
+                    <div class="blog-date">18 ЯНВ 2026</div>
+                    <h3>Сколько получает модель?</h3>
+                    <p>Разбор деления прибыли, влияния трафика и условий для начинающих моделей.</p>
+                    <a href="article2.html" class="blog-link">Читать полностью →</a>
+                </article>
+
+                <article class="blog-card active">
+                    <div class="blog-date">20 ЯНВ 2026</div>
+                    <h3>Безопасность данных</h3>
+                    <p>Как мы обеспечиваем полную анонимность и защиту контента наших моделей.</p>
+                    <a href="#" class="blog-link" style="opacity: 0.5;">Скоро будет →</a>
+                </article>
+
+                </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">DIVA <span>MODELS</span></div>
+                <div class="footer-nav">
+                    <a href="index.html#about">О нас</a>
+                    <a href="index.html#services">Услуги</a>
+                    <a href="https://t.me/Diva_ManagerOF" target="_blank">Telegram</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 DIVA MODELS. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".blog-card");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+    </script>
+
+</body>
+</html>
