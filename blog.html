@@ -49,33 +49,38 @@
                 </article>
 
                 <article class="blog-card active">
-                    <div class="blog-date">20 ЯНВ 2026</div>
-                    <h3>Безопасность данных</h3>
-                    <p>Как мы обеспечиваем полную анонимность и защиту контента наших моделей.</p>
-                    <a href="#" class="blog-link" style="opacity: 0.5; pointer-events: none;">Скоро будет →</a>
+                    <div class="blog-date">25 НОЯ 2025</div>
+                    <h3>Правила Онлифанс</h3>
+                    <p>Пользователи могут тратить на платформе до 500 долларов в день, и этот лимит увеличивается для пользователей, которые долгое время находятся на платформе с хорошей репутацией.</p>
+                    <a href="#" class="blog-link" style="opacity: 0.5; pointer-events: none;">Читать полностью →</a>
                 </article>
 
             </div>
         </div>
     </main>
 
-    <footer class="footer">
+  <footer class="footer" style="padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px;">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 30px;">
+                
                 <div class="logo">DIVA <span>MODELS</span></div>
-                <div class="footer-nav">
-                    <a href="index.html#about">О нас</a>
-                    <a href="index.html#services">Услуги</a>
-                    <a href="https://t.me/Diva_ManagerOF" target="_blank">Telegram</a>
+                
+                <nav class="footer-nav" style="display: flex; flex-direction: row; justify-content: center; gap: 25px; flex-wrap: wrap;">
+                    <a href="index.html#about" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">О нас</a>
+                    <a href="index.html#features" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">Преимущества</a>
+                    <a href="index.html#services" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">Услуги</a>
+                    <a href="https://t.me/Diva_ManagerOF" target="_blank" style="text-decoration: none; color: var(--accent-red); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Telegram</a>
+                </nav>
+
+                <div class="footer-bottom" style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; width: 100%;">
+                    <p style="font-size: 11px; color: #444; letter-spacing: 1px;">&copy; 2026 DIVA MODELS. Все права защищены.</p>
                 </div>
-            </div>
-            <div class="footer-bottom" style="text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
-                <p>&copy; 2026 DIVA MODELS. Все права защищены.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Скрипт для плавного появления карточек при скролле
         function reveal() {
             var reveals = document.querySelectorAll(".blog-card");
             for (var i = 0; i < reveals.length; i++) {
@@ -92,3 +97,4 @@
 
 </body>
 </html>
+
