@@ -6,26 +6,182 @@
     <title>Блог | DIVA MODELS</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- СТИЛИ ШАПКИ (Копия с главной) --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: #fff;
+            letter-spacing: 2px;
+            z-index: 2002;
+            position: relative;
+        }
+        .logo span { color: #d41d3d; }
+
+        /* Контролы справа */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 2002;
+            position: relative;
+        }
+
+        /* Языки */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .lang-btn {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #ffffff;
+            opacity: 0.5;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
+        }
+        .lang-btn:hover { opacity: 1; }
+        .lang-btn.active {
+            opacity: 1 !important;
+            color: #d41d3d !important;
+            border-bottom: 2px solid #d41d3d;
+        }
+        .lang-divider { color: #fff; opacity: 0.2; }
+
+        /* Меню */
+        .main-nav {
+            display: flex;
+            gap: 30px;
+        }
+        .main-nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .main-nav a:hover { color: #d41d3d; }
+
+        /* Бургер */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+        .burger-menu span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            position: absolute;
+            transition: 0.3s;
+        }
+        .burger-menu span:nth-child(1) { top: 0; }
+        .burger-menu span:nth-child(2) { top: 9px; }
+        .burger-menu span:nth-child(3) { top: 18px; }
+        
+        .burger-menu.active span:nth-child(1) { transform: rotate(45deg); top: 9px; background: #d41d3d; }
+        .burger-menu.active span:nth-child(2) { opacity: 0; }
+        .burger-menu.active span:nth-child(3) { transform: rotate(-45deg); top: 9px; background: #d41d3d; }
+
+        /* Адаптация */
+        @media (max-width: 992px) {
+            .burger-menu { display: block; }
+
+            .main-nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(5, 5, 5, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease;
+                z-index: 1500;
+                gap: 40px;
+                opacity: 0;
+                pointer-events: none;
+            }
+            .main-nav.active { opacity: 1; pointer-events: all; }
+            .main-nav a { font-size: 24px; font-weight: 800; }
+            .nav-controls { gap: 12px; }
+            .logo { font-size: 18px; }
+            .btn-pill {
+                padding: 8px 15px !important;
+                font-size: 10px !important;
+                margin-left: 0 !important;
+                white-space: nowrap;
+            }
+        }
+    </style>
 </head>
 <body style="background-color: #050505;">
 
     <header>
         <div class="container header-content">
             <div class="logo">DIVA <span>MODELS</span></div>
-            <nav class="main-nav">
-                <a href="index.html#about">О нас</a>
-                <a href="index.html#features">Преимущества</a>
-                <a href="index.html#services">Услуги</a>
-                <a href="index.html" class="btn-pill">← На главную</a>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html#about" class="lang" data-ru="О нас" data-ua="Про нас" onclick="closeMenu()">О нас</a>
+                <a href="index.html#features" class="lang" data-ru="Преимущества" data-ua="Переваги" onclick="closeMenu()">Преимущества</a>
+                <a href="index.html#services" class="lang" data-ru="Услуги" data-ua="Послуги" onclick="closeMenu()">Услуги</a>
+                <a href="index.html" class="lang" data-ru="На главную" data-ua="На головну" onclick="closeMenu()">На главную</a>
             </nav>
+
+            <div class="nav-controls">
+                
+                <div class="lang-switcher">
+                    <span class="lang-btn active" id="btn-ru" onclick="setLanguage('ru')">RU</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-btn" id="btn-ua" onclick="setLanguage('ua')">UA</span>
+                </div>
+
+                <a href="https://t.me/Diva_ManagerOF" class="btn-pill lang" data-ru="Связаться" data-ua="Зв'язатися" target="_blank">Связаться</a>
+
+                <div class="burger-menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
     </header>
 
     <main style="padding-top: 180px; padding-bottom: 100px;">
         <div class="container">
-            <div class="label" style="text-align: center;">JOURNAL</div>
+            <div class="label lang" data-ru="JOURNAL" data-ua="ЖУРНАЛ" style="text-align: center;">JOURNAL</div>
             <h1 class="section-title" style="text-align: center; margin-bottom: 60px;">
-                ВСЕ <span class="text-red">СТАТЬИ</span>
+                <span class="lang" data-ru="ВСЕ" data-ua="ВСІ">ВСЕ</span> <span class="text-red lang" data-ru="СТАТЬИ" data-ua="СТАТТІ">СТАТЬИ</span>
             </h1>
             
             <div class="blog-grid" style="
@@ -35,31 +191,31 @@
             ">
 
                  <article class="blog-card active">
-                    <div class="blog-date">5 ЯНВ 2026</div>
-                    <h3>ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?</h3>
-                    <p>Рекрутинг здорового человека: почему лже-скауты губят карьеру модели</p>
-                    <a href="article5.html" class="blog-link">Читать полностью →</a>
+                    <div class="blog-date lang" data-ru="5 ЯНВ 2026" data-ua="5 СІЧ 2026">5 ЯНВ 2026</div>
+                    <h3 class="lang" data-ru="ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?" data-ua="ФЕЙК-АГЕНЦІЇ: хто насправді тобі пише?">ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?</h3>
+                    <p class="lang" data-ru="Рекрутинг здорового человека: почему лже-скауты губят карьеру модели" data-ua="Рекрутинг здорової людини: чому лже-скаути гублять кар'єру моделі">Рекрутинг здорового человека: почему лже-скауты губят карьеру модели</p>
+                    <a href="article5.html" class="blog-link lang" data-ru="Читать полностью →" data-ua="Читати повністю →">Читать полностью →</a>
                 </article>
 
                 <article class="blog-card active">
-                    <div class="blog-date">27 ДЕК 2025</div>
-                    <h3>Сколько получает модель?</h3>
-                    <p>Разбор деления прибыли, влияния трафика и условий для начинающих моделей.</p>
-                    <a href="article2.html" class="blog-link">Читать полностью →</a>
+                    <div class="blog-date lang" data-ru="27 ДЕК 2025" data-ua="27 ГРУ 2025">27 ДЕК 2025</div>
+                    <h3 class="lang" data-ru="Сколько получает модель?" data-ua="Скільки отримує модель?">Сколько получает модель?</h3>
+                    <p class="lang" data-ru="Разбор деления прибыли, влияния трафика и условий для начинающих моделей." data-ua="Розбір розподілу прибутку, впливу трафіку та умов для моделей-початківців.">Разбор деления прибыли, влияния трафика и условий для начинающих моделей.</p>
+                    <a href="article2.html" class="blog-link lang" data-ru="Читать полностью →" data-ua="Читати повністю →">Читать полностью →</a>
                 </article>
 
               <article class="blog-card active">
-                    <div class="blog-date">20 ДЕК 2025</div>
-                    <h3>Агентство или Соло?</h3>
-                    <p>Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков.</p>
-                    <a href="article1.html" class="blog-link">Читать полностью →</a>
+                    <div class="blog-date lang" data-ru="20 ДЕК 2025" data-ua="20 ГРУ 2025">20 ДЕК 2025</div>
+                    <h3 class="lang" data-ru="Агентство или Соло?" data-ua="Агенція чи Соло?">Агентство или Соло?</h3>
+                    <p class="lang" data-ru="Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков." data-ua="Чесний розбір плюсів та мінусів. Розбираємо, де більше грошей і менше ризиків.">Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков.</p>
+                    <a href="article1.html" class="blog-link lang" data-ru="Читать полностью →" data-ua="Читати повністю →">Читать полностью →</a>
                 </article>
                 
                   <article class="blog-card active">
-                    <div class="blog-date">25 НОЯ 2025</div>
-                    <h3>Правила Онлифанс</h3>
-                    <p>Пользователи могут тратить на платформе до 500 долларов в день, и этот лимит увеличивается для пользователей, которые долгое время находятся на платформе с хорошей репутацией.</p>
-                    <a href="article3.html" class="blog-link">Читать полностью →</a>
+                    <div class="blog-date lang" data-ru="25 НОЯ 2025" data-ua="25 ЛИС 2025">25 НОЯ 2025</div>
+                    <h3 class="lang" data-ru="Правила Онлифанс" data-ua="Правила Онліфанс">Правила Онлифанс</h3>
+                    <p class="lang" data-ru="Пользователи могут тратить на платформе до 500 долларов в день, и этот лимит увеличивается." data-ua="Користувачі можуть витрачати на платформі до 500 доларів на день, і цей ліміт збільшується.">Пользователи могут тратить на платформе до 500 долларов в день, и этот лимит увеличивается для пользователей, которые долгое время находятся на платформе с хорошей репутацией.</p>
+                    <a href="article3.html" class="blog-link lang" data-ru="Читать полностью →" data-ua="Читати повністю →">Читать полностью →</a>
                 </article>
                 
 
@@ -74,21 +230,63 @@
                 <div class="logo">DIVA <span>MODELS</span></div>
                 
                 <nav class="footer-nav" style="display: flex; flex-direction: row; justify-content: center; gap: 25px; flex-wrap: wrap;">
-                    <a href="index.html#about" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">О нас</a>
-                    <a href="index.html#features" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">Преимущества</a>
-                    <a href="index.html#services" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">Услуги</a>
+                    <a href="index.html#about" class="lang" data-ru="О нас" data-ua="Про нас" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">О нас</a>
+                    <a href="index.html#features" class="lang" data-ru="Преимущества" data-ua="Переваги" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">Преимущества</a>
+                    <a href="index.html#services" class="lang" data-ru="Услуги" data-ua="Послуги" style="text-decoration: none; color: var(--gray-text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--gray-text)'">Услуги</a>
                     <a href="https://t.me/Diva_ManagerOF" target="_blank" style="text-decoration: none; color: var(--accent-red); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Telegram</a>
                 </nav>
 
                 <div class="footer-bottom" style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; width: 100%;">
-                    <p style="font-size: 11px; color: #444; letter-spacing: 1px;">&copy; 2026 DIVA MODELS. Все права защищены.</p>
+                    <p class="lang" data-ru="&copy; 2026 DIVA MODELS. Все права защищены." data-ua="&copy; 2026 DIVA MODELS. Усі права захищені." style="font-size: 11px; color: #444; letter-spacing: 1px;">&copy; 2026 DIVA MODELS. Все права защищены.</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Скрипт для плавного появления карточек при скролле
+        // --- ФУНКЦИЯ ДЛЯ БУРГЕР-МЕНЮ ---
+        function toggleMenu() {
+            const menu = document.getElementById('mainNav');
+            const burger = document.querySelector('.burger-menu');
+            
+            menu.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('mainNav');
+            const burger = document.querySelector('.burger-menu');
+            
+            menu.classList.remove('active');
+            burger.classList.remove('active');
+        }
+
+        // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ---
+        function setLanguage(lang) {
+            localStorage.setItem('diva_lang', lang);
+
+            // Меняем текст везде
+            document.querySelectorAll('.lang').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    el.innerHTML = text;
+                }
+            });
+
+            // Обновляем подсветку кнопок
+            const btnRu = document.getElementById('btn-ru');
+            const btnUa = document.getElementById('btn-ua');
+
+            if (lang === 'ru') {
+                btnRu.classList.add('active');
+                btnUa.classList.remove('active');
+            } else {
+                btnUa.classList.add('active');
+                btnRu.classList.remove('active');
+            }
+        }
+
+        // --- АНИМАЦИЯ ---
         function reveal() {
             var reveals = document.querySelectorAll(".blog-card");
             for (var i = 0; i < reveals.length; i++) {
@@ -99,15 +297,16 @@
                 }
             }
         }
+
+        // --- ИНИЦИАЛИЗАЦИЯ ---
+        window.onload = () => {
+            const savedLang = localStorage.getItem('diva_lang') || 'ru';
+            setLanguage(savedLang);
+            reveal();
+        };
+
         window.addEventListener("scroll", reveal);
-        window.onload = reveal;
     </script>
 
 </body>
 </html>
-
-
-
-
-
-
