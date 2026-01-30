@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIVA MODELS | Premium Agency</title>
     
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23d41d3d'/%3E%3Ctext x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='Georgia, serif' font-weight='bold' font-size='36' fill='white'%3ED%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="logo.png" type="image/png">
     
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -38,9 +38,9 @@
             letter-spacing: 2px;
             z-index: 2002; 
             position: relative;
-            display: flex;       /* Добавлено для выравнивания */
+            display: flex;       
             align-items: center; 
-            gap: 5px;            /* Отступ между словами */
+            gap: 5px;            
         }
         .logo span { color: #d41d3d; }
 
@@ -49,7 +49,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            z-index: 2002; /* Важно: поверх меню */
+            z-index: 2002;
             position: relative;
         }
 
@@ -74,7 +74,6 @@
 
         .lang-btn:hover { opacity: 1; }
 
-        /* Активный язык (красный) */
         .lang-btn.active {
             opacity: 1 !important;
             color: #d41d3d !important;
@@ -102,7 +101,7 @@
 
         /* --- БУРГЕР ИКОНКА --- */
         .burger-menu {
-            display: none; /* Скрыт на ПК */
+            display: none;
             cursor: pointer;
             width: 30px;
             height: 20px;
@@ -122,17 +121,14 @@
         .burger-menu span:nth-child(2) { top: 9px; }
         .burger-menu span:nth-child(3) { top: 18px; }
 
-        /* Анимация крестика */
         .burger-menu.active span:nth-child(1) { transform: rotate(45deg); top: 9px; background: #d41d3d; }
         .burger-menu.active span:nth-child(2) { opacity: 0; }
         .burger-menu.active span:nth-child(3) { transform: rotate(-45deg); top: 9px; background: #d41d3d; }
 
-        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (Телефоны и планшеты) --- */
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
         @media (max-width: 992px) {
-            
-            .burger-menu { display: block; } /* Показываем бургер */
+            .burger-menu { display: block; } 
 
-            /* Меню на весь экран */
             .main-nav {
                 position: fixed;
                 top: 0;
@@ -141,33 +137,30 @@
                 height: 100vh;
                 background: rgba(5, 5, 5, 0.98);
                 backdrop-filter: blur(15px);
-                flex-direction: column; /* Ссылки в столбик */
-                justify-content: center; /* Центр по вертикали */
-                align-items: center;     /* Центр по горизонтали */
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 transition: 0.4s ease;
                 z-index: 1500;
                 gap: 40px;
-                
-                /* Скрыто по умолчанию */
                 opacity: 0;
                 pointer-events: none;
             }
 
-            /* Открытое меню */
             .main-nav.active {
                 opacity: 1;
                 pointer-events: all;
             }
 
             .main-nav a {
-                font-size: 24px; /* Крупный шрифт */
+                font-size: 24px;
                 font-weight: 800;
             }
 
             /* ЛОГОТИП В СТОЛБИК НА МОБИЛЬНОМ */
             .logo {
-                flex-direction: column; /* Вертикально */
-                align-items: flex-start; /* По левому краю */
+                flex-direction: column;
+                align-items: flex-start;
                 line-height: 1;
                 font-size: 16px !important;
                 gap: 2px;
@@ -176,12 +169,10 @@
                 display: block;
             }
 
-            /* Адаптация кнопок в шапке */
             .nav-controls {
                 gap: 12px;
             }
             
-            /* Уменьшаем кнопку "Связаться" чтобы влезла */
             .btn-pill {
                 padding: 8px 15px !important;
                 font-size: 10px !important;
@@ -450,19 +441,19 @@
                         <div class="blog-date lang" data-ru="19 ЯНВ 2026" data-ua="19 СІЧ 2026">19 ЯНВ 2026</div>
                         <h3 class="lang" data-ru="ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?" data-ua="ФЕЙК-АГЕНЦІЇ: хто насправді тобі пише?">ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?</h3>
                         <p class="lang" data-ru="Рекрутинг здорового человека: почему лже-скауты губят карьеру модели!" data-ua="Рекрутинг здорової людини: чому лже-скаути гублять кар'єру моделі!">Рекрутинг здорового человека...</p>
-                        <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
+                        <a href="article5.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
                     </article>          
                     <article class="blog-card reveal" style="width: 100%; text-align: left;">
                         <div class="blog-date lang" data-ru="27 ДЕК 2025" data-ua="27 ГРУ 2025">27 ДЕК 2025</div>
                         <h3 class="lang" data-ru="Сколько получает модель?" data-ua="Скільки отримує модель?">Сколько получает модель?</h3>
                         <p class="lang" data-ru="Разбор деления прибыли, влияния трафика и условий для начинающих моделей." data-ua="Розбір розподілу прибутку, впливу трафіку та умов для моделей-початківців.">Разбор деления прибыли...</p>
-                        <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
+                        <a href="article2.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
                     </article>
                     <article class="blog-card reveal" style="width: 100%; text-align: left;">
                         <div class="blog-date lang" data-ru="20 ДЕК 2025" data-ua="20 ГРУ 2025">20 ДЕК 2025</div>
                         <h3 class="lang" data-ru="Агентство или Соло?" data-ua="Агенція чи Соло?">Агентство или Соло?</h3>
                         <p class="lang" data-ru="Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков." data-ua="Чесний розбір плюсів та мінусів. Розбираємо, де більше грошей і менше ризиків.">Честный разбор плюсов и минусов...</p>
-                        <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
+                        <a href="article1.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
                     </article>
                 </div>
 
