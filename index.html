@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIVA MODELS | Premium Agency</title>
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23d41d3d'/%3E%3Ctext x='50%25' y='50%25' dy='.35em' text-anchor='middle' font-family='Georgia, serif' font-weight='bold' font-size='36' fill='white'%3ED%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -26,15 +29,18 @@
             padding: 15px 0;
         }
 
-        /* Логотип */
+        /* Логотип (Десктоп) */
         .logo {
             font-family: 'Syncopate', sans-serif;
             font-weight: 700;
             font-size: 22px;
             color: #fff;
             letter-spacing: 2px;
-            z-index: 2002; /* Чтобы лого было поверх открытого меню */
+            z-index: 2002; 
             position: relative;
+            display: flex;       /* Добавлено для выравнивания */
+            align-items: center; 
+            gap: 5px;            /* Отступ между словами */
         }
         .logo span { color: #d41d3d; }
 
@@ -158,12 +164,23 @@
                 font-weight: 800;
             }
 
+            /* ЛОГОТИП В СТОЛБИК НА МОБИЛЬНОМ */
+            .logo {
+                flex-direction: column; /* Вертикально */
+                align-items: flex-start; /* По левому краю */
+                line-height: 1;
+                font-size: 16px !important;
+                gap: 2px;
+            }
+            .logo span {
+                display: block;
+            }
+
             /* Адаптация кнопок в шапке */
             .nav-controls {
                 gap: 12px;
             }
-            .logo { font-size: 18px; }
-
+            
             /* Уменьшаем кнопку "Связаться" чтобы влезла */
             .btn-pill {
                 padding: 8px 15px !important;
@@ -206,7 +223,8 @@
         </div>
     </header>
 
-    <main style="padding-top: 80px;"> <section class="hero" id="hero">
+    <main style="padding-top: 80px;"> 
+        <section class="hero" id="hero">
             <div class="container hero-content">
                 <div class="label lang" data-ru="WORLDWIDE AGENCY" data-ua="ВСЕСВІТНЯ АГЕНЦІЯ">WORLDWIDE AGENCY</div>
                 <h1 class="lang" data-ru="DIVA <span class='text-red'>MODELS</span>" data-ua="DIVA <span class='text-red'>MODELS</span>">
