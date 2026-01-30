@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Стили для переключателя языков */
+        /* --- СТИЛИ ДЛЯ БУРГЕР-МЕНЮ И НАВИГАЦИИ --- */
+
+        /* 1. Базовые стили переключателя языков */
         .lang-switcher {
             display: inline-flex;
             align-items: center;
@@ -24,17 +26,101 @@
             opacity: 0.5;
             padding: 2px 4px;
         }
-        .lang-btn:hover {
-            opacity: 0.8;
-        }
+        .lang-btn:hover { opacity: 0.8; }
         .lang-btn.active {
             opacity: 1;
-            color: #d41d3d; /* Красный акцент */
+            color: #d41d3d;
             border-bottom: 1px solid #d41d3d;
         }
-        .lang-divider {
-            color: #fff;
-            opacity: 0.2;
+        .lang-divider { color: #fff; opacity: 0.2; }
+
+        /* 2. Скрываем бургер на ПК */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            z-index: 2000; /* Чтобы был поверх меню */
+        }
+
+        /* 3. Адаптация под мобильные (планшеты и телефоны) */
+        @media (max-width: 992px) {
+            
+            /* Показываем бургер */
+            .burger-menu {
+                display: block;
+                width: 30px;
+                height: 20px;
+                position: relative;
+            }
+
+            /* Рисуем полоски бургера */
+            .burger-menu span {
+                display: block;
+                width: 100%;
+                height: 2px;
+                background-color: #fff;
+                position: absolute;
+                transition: all 0.3s ease;
+            }
+            .burger-menu span:nth-child(1) { top: 0; }
+            .burger-menu span:nth-child(2) { top: 9px; }
+            .burger-menu span:nth-child(3) { top: 18px; }
+
+            /* Анимация превращения в крестик при классе .active */
+            .burger-menu.active span:nth-child(1) {
+                transform: rotate(45deg);
+                top: 9px;
+                background-color: #d41d3d; /* Красный крестик */
+            }
+            .burger-menu.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .burger-menu.active span:nth-child(3) {
+                transform: rotate(-45deg);
+                top: 9px;
+                background-color: #d41d3d;
+            }
+
+            /* Стили самого меню на мобильном */
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Спрятано за экраном справа */
+                width: 100%;
+                height: 100vh;
+                background: rgba(5, 5, 5, 0.98); /* Почти черный фон */
+                backdrop-filter: blur(10px);
+                flex-direction: column; /* Вертикальный список */
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease;
+                z-index: 1500;
+                gap: 30px; /* Отступы между пунктами */
+            }
+
+            /* Класс для открытия меню */
+            .main-nav.active {
+                right: 0;
+            }
+
+            /* Увеличиваем шрифт ссылок в меню */
+            .main-nav a {
+                font-size: 20px;
+                display: block; /* Возвращаем видимость ссылок */
+            }
+
+            /* Кнопка в меню */
+            .btn-pill {
+                margin-left: 0;
+                font-size: 14px;
+                padding: 15px 40px;
+            }
+            
+            /* Переключатель языков в мобильном меню */
+            .lang-switcher {
+                margin: 20px 0 0 0;
+                font-size: 16px;
+                transform: scale(1.2);
+            }
         }
     </style>
 </head>
@@ -43,11 +129,18 @@
     <header>
         <div class="container header-content">
             <div class="logo">DIVA <span>MODELS</span></div>
-            <nav class="main-nav">
-                <a href="#about" class="lang" data-ru="О нас" data-ua="Про нас">О нас</a>
-                <a href="#features" class="lang" data-ru="Преимущества" data-ua="Переваги">Преимущества</a>
-                <a href="#services" class="lang" data-ru="Услуги" data-ua="Послуги">Услуги</a>
-                <a href="#blog" class="lang" data-ru="Блог" data-ua="Блог">Блог</a>
+            
+            <div class="burger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <a href="#about" class="lang" data-ru="О нас" data-ua="Про нас" onclick="closeMenu()">О нас</a>
+                <a href="#features" class="lang" data-ru="Преимущества" data-ua="Переваги" onclick="closeMenu()">Преимущества</a>
+                <a href="#services" class="lang" data-ru="Услуги" data-ua="Послуги" onclick="closeMenu()">Услуги</a>
+                <a href="#blog" class="lang" data-ru="Блог" data-ua="Блог" onclick="closeMenu()">Блог</a>
                 
                 <div class="lang-switcher">
                     <span class="lang-btn active" id="btn-ru" onclick="setLanguage('ru')">RU</span>
@@ -55,7 +148,7 @@
                     <span class="lang-btn" id="btn-ua" onclick="setLanguage('ua')">UA</span>
                 </div>
 
-                <a href="https://t.me/Diva_ManagerOF" class="btn-pill lang" data-ru="Связаться" data-ua="Зв'язатися" target="_blank">Связаться</a>
+                <a href="https://t.me/Diva_ManagerOF" class="btn-pill lang" data-ru="Связаться" data-ua="Зв'язатися" target="_blank" onclick="closeMenu()">Связаться</a>
             </nav>
         </div>
     </header>
@@ -459,25 +552,41 @@
     </footer>
 
     <script>
-        // Функция переключения языка
+        // --- ФУНКЦИЯ ДЛЯ БУРГЕР-МЕНЮ ---
+        function toggleMenu() {
+            const menu = document.getElementById('mainNav');
+            const burger = document.querySelector('.burger-menu');
+            
+            // Переключаем класс active
+            menu.classList.toggle('active');
+            burger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('mainNav');
+            const burger = document.querySelector('.burger-menu');
+            
+            // Убираем класс active (закрываем меню)
+            menu.classList.remove('active');
+            burger.classList.remove('active');
+        }
+
+        // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ---
         function setLanguage(lang) {
-            // Сохраняем выбор в localStorage (чтобы сайт помнил выбор)
             localStorage.setItem('diva_lang', lang);
 
-            // Находим все элементы с классом .lang и меняем текст
             document.querySelectorAll('.lang').forEach(el => {
                 const text = el.getAttribute(`data-${lang}`);
                 if (text) {
-                    el.innerHTML = text; // innerHTML позволяет использовать теги типа <span> или <br> внутри текста
+                    el.innerHTML = text;
                 }
             });
 
-            // Обновляем визуальный вид кнопок
             document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
             document.getElementById('btn-ua').classList.toggle('active', lang === 'ua');
         }
 
-        // Функция анимации появления блоков (из твоего оригинального кода)
+        // --- ФУНКЦИЯ АНИМАЦИИ ПРИ СКРОЛЛЕ ---
         function reveal() {
             var reveals = document.querySelectorAll("section, .feature-card, .service-item, .blog-card");
 
@@ -492,11 +601,11 @@
             }
         }
 
-        // При загрузке страницы: проверяем сохраненный язык и запускаем анимации
+        // --- ИНИЦИАЛИЗАЦИЯ ---
         window.onload = () => {
-            const savedLang = localStorage.getItem('diva_lang') || 'ru'; // Если язык не выбран, по умолчанию RU
+            const savedLang = localStorage.getItem('diva_lang') || 'ru';
             setLanguage(savedLang);
-            reveal(); // Запускаем проверку видимости блоков сразу
+            reveal();
         };
 
         window.addEventListener("scroll", reveal);
