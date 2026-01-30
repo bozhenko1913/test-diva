@@ -28,7 +28,7 @@
             padding: 15px 30px;
         }
 
-        /* Логотип */
+        /* Логотип (Десктоп) */
         .logo {
             font-family: 'Cinzel', serif;
             letter-spacing: 3px;
@@ -37,6 +37,9 @@
             color: #fff;
             text-decoration: none;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Отступ между DIVA и MODELS на ПК */
         }
         .logo span { color: #d41d3d; }
 
@@ -44,7 +47,7 @@
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 25px; /* Отступы на компьютере */
+            gap: 25px;
         }
 
         /* 1. Переключатель языков */
@@ -113,20 +116,29 @@
         /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
         @media (max-width: 768px) {
             .header-content {
-                padding: 15px 20px; /* Чуть меньше отступы по краям */
+                padding: 15px 20px;
             }
 
+            /* ЛОГОТИП В СТОЛБИК */
             .logo {
-                font-size: 16px; /* Уменьшаем логотип */
-                letter-spacing: 1px;
+                flex-direction: column; /* Ставим элементы вертикально */
+                align-items: flex-start; /* Выравниваем по левому краю */
+                line-height: 1; /* Уменьшаем расстояние между строками */
+                font-size: 14px; /* Чуть меньше шрифт, чтобы было аккуратно */
+                gap: 2px; /* Маленький отступ между словами */
+            }
+
+            .logo span {
+                font-size: 14px; /* Размер слова MODELS */
+                display: block;
             }
 
             .nav-controls {
-                gap: 12px; /* Уменьшаем расстояние между кнопками */
+                gap: 12px;
             }
 
             .btn-pill {
-                padding: 8px 14px; /* Компактная кнопка */
+                padding: 8px 14px;
                 font-size: 10px;
             }
             
@@ -139,11 +151,11 @@
             }
         }
         
-        /* Для очень маленьких экранов (iPhone SE и т.д.) */
+        /* Для совсем маленьких экранов */
         @media (max-width: 380px) {
-            .logo span { display: none; } /* Скрываем слово MODELS если совсем мало места */
-            .logo::after { content: ""; } 
             .nav-controls { gap: 8px; }
+            .logo { font-size: 12px; }
+            .logo span { font-size: 12px; }
         }
     </style>
 </head>
@@ -151,7 +163,10 @@
 
     <header>
         <div class="header-content">
-            <a href="index.html" class="logo">DIVA <span>MODELS</span></a>
+            <a href="index.html" class="logo">
+                DIVA 
+                <span>MODELS</span>
+            </a>
             
             <div class="nav-controls">
                 
