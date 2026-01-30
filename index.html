@@ -7,119 +7,169 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* --- СТИЛИ ДЛЯ БУРГЕР-МЕНЮ И НАВИГАЦИИ --- */
+        /* --- СТИЛИ ШАПКИ --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-        /* 1. Базовые стили переключателя языков */
-        .lang-switcher {
-            display: inline-flex;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 5px;
-            margin: 0 15px;
+            padding: 15px 0;
+        }
+
+        /* Логотип */
+        .logo {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: #fff;
+            letter-spacing: 2px;
+            z-index: 2002; /* Чтобы лого было поверх открытого меню */
+            position: relative;
+        }
+        .logo span { color: #d41d3d; }
+
+        /* --- ПРАВАЯ ЧАСТЬ (Язык + Кнопка + Бургер) --- */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 2002; /* Важно: поверх меню */
+            position: relative;
+        }
+
+        /* Переключатель языков */
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
         }
+
         .lang-btn {
             cursor: pointer;
             transition: all 0.3s ease;
-            color: #fff;
+            color: #ffffff;
             opacity: 0.5;
-            padding: 2px 4px;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
         }
-        .lang-btn:hover { opacity: 0.8; }
+
+        .lang-btn:hover { opacity: 1; }
+
+        /* Активный язык (красный) */
         .lang-btn.active {
-            opacity: 1;
-            color: #d41d3d;
-            border-bottom: 1px solid #d41d3d;
+            opacity: 1 !important;
+            color: #d41d3d !important;
+            border-bottom: 2px solid #d41d3d;
         }
+
         .lang-divider { color: #fff; opacity: 0.2; }
 
-        /* 2. Скрываем бургер на ПК */
-        .burger-menu {
-            display: none;
-            cursor: pointer;
-            z-index: 2000; /* Чтобы был поверх меню */
+        /* --- НАВИГАЦИЯ (Ссылки) --- */
+        .main-nav {
+            display: flex;
+            gap: 30px;
         }
 
-        /* 3. Адаптация под мобильные (планшеты и телефоны) */
+        .main-nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .main-nav a:hover { color: #d41d3d; }
+
+        /* --- БУРГЕР ИКОНКА --- */
+        .burger-menu {
+            display: none; /* Скрыт на ПК */
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .burger-menu span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            position: absolute;
+            transition: 0.3s;
+        }
+
+        .burger-menu span:nth-child(1) { top: 0; }
+        .burger-menu span:nth-child(2) { top: 9px; }
+        .burger-menu span:nth-child(3) { top: 18px; }
+
+        /* Анимация крестика */
+        .burger-menu.active span:nth-child(1) { transform: rotate(45deg); top: 9px; background: #d41d3d; }
+        .burger-menu.active span:nth-child(2) { opacity: 0; }
+        .burger-menu.active span:nth-child(3) { transform: rotate(-45deg); top: 9px; background: #d41d3d; }
+
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (Телефоны и планшеты) --- */
         @media (max-width: 992px) {
             
-            /* Показываем бургер */
-            .burger-menu {
-                display: block;
-                width: 30px;
-                height: 20px;
-                position: relative;
-            }
+            .burger-menu { display: block; } /* Показываем бургер */
 
-            /* Рисуем полоски бургера */
-            .burger-menu span {
-                display: block;
-                width: 100%;
-                height: 2px;
-                background-color: #fff;
-                position: absolute;
-                transition: all 0.3s ease;
-            }
-            .burger-menu span:nth-child(1) { top: 0; }
-            .burger-menu span:nth-child(2) { top: 9px; }
-            .burger-menu span:nth-child(3) { top: 18px; }
-
-            /* Анимация превращения в крестик при классе .active */
-            .burger-menu.active span:nth-child(1) {
-                transform: rotate(45deg);
-                top: 9px;
-                background-color: #d41d3d; /* Красный крестик */
-            }
-            .burger-menu.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .burger-menu.active span:nth-child(3) {
-                transform: rotate(-45deg);
-                top: 9px;
-                background-color: #d41d3d;
-            }
-
-            /* Стили самого меню на мобильном */
+            /* Меню на весь экран */
             .main-nav {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Спрятано за экраном справа */
+                left: 0;
                 width: 100%;
                 height: 100vh;
-                background: rgba(5, 5, 5, 0.98); /* Почти черный фон */
-                backdrop-filter: blur(10px);
-                flex-direction: column; /* Вертикальный список */
-                justify-content: center;
-                align-items: center;
+                background: rgba(5, 5, 5, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column; /* Ссылки в столбик */
+                justify-content: center; /* Центр по вертикали */
+                align-items: center;     /* Центр по горизонтали */
                 transition: 0.4s ease;
                 z-index: 1500;
-                gap: 30px; /* Отступы между пунктами */
+                gap: 40px;
+                
+                /* Скрыто по умолчанию */
+                opacity: 0;
+                pointer-events: none;
             }
 
-            /* Класс для открытия меню */
+            /* Открытое меню */
             .main-nav.active {
-                right: 0;
+                opacity: 1;
+                pointer-events: all;
             }
 
-            /* Увеличиваем шрифт ссылок в меню */
             .main-nav a {
-                font-size: 20px;
-                display: block; /* Возвращаем видимость ссылок */
+                font-size: 24px; /* Крупный шрифт */
+                font-weight: 800;
             }
 
-            /* Кнопка в меню */
-            .btn-pill {
-                margin-left: 0;
-                font-size: 14px;
-                padding: 15px 40px;
+            /* Адаптация кнопок в шапке */
+            .nav-controls {
+                gap: 12px;
             }
-            
-            /* Переключатель языков в мобильном меню */
-            .lang-switcher {
-                margin: 20px 0 0 0;
-                font-size: 16px;
-                transform: scale(1.2);
+            .logo { font-size: 18px; }
+
+            /* Уменьшаем кнопку "Связаться" чтобы влезла */
+            .btn-pill {
+                padding: 8px 15px !important;
+                font-size: 10px !important;
+                margin-left: 0 !important;
+                white-space: nowrap;
             }
         }
     </style>
@@ -130,17 +180,14 @@
         <div class="container header-content">
             <div class="logo">DIVA <span>MODELS</span></div>
             
-            <div class="burger-menu" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
             <nav class="main-nav" id="mainNav">
                 <a href="#about" class="lang" data-ru="О нас" data-ua="Про нас" onclick="closeMenu()">О нас</a>
                 <a href="#features" class="lang" data-ru="Преимущества" data-ua="Переваги" onclick="closeMenu()">Преимущества</a>
                 <a href="#services" class="lang" data-ru="Услуги" data-ua="Послуги" onclick="closeMenu()">Услуги</a>
                 <a href="#blog" class="lang" data-ru="Блог" data-ua="Блог" onclick="closeMenu()">Блог</a>
+            </nav>
+
+            <div class="nav-controls">
                 
                 <div class="lang-switcher">
                     <span class="lang-btn active" id="btn-ru" onclick="setLanguage('ru')">RU</span>
@@ -148,388 +195,266 @@
                     <span class="lang-btn" id="btn-ua" onclick="setLanguage('ua')">UA</span>
                 </div>
 
-                <a href="https://t.me/Diva_ManagerOF" class="btn-pill lang" data-ru="Связаться" data-ua="Зв'язатися" target="_blank" onclick="closeMenu()">Связаться</a>
-            </nav>
+                <a href="https://t.me/Diva_ManagerOF" class="btn-pill lang" data-ru="Связаться" data-ua="Зв'язатися" target="_blank">Связаться</a>
+
+                <div class="burger-menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <section class="hero" id="hero">
-        <div class="container hero-content">
-            <div class="label lang" data-ru="WORLDWIDE AGENCY" data-ua="ВСЕСВІТНЯ АГЕНЦІЯ">WORLDWIDE AGENCY</div>
-            
-            <h1 class="lang" 
-                data-ru="DIVA <span class='text-red'>MODELS</span>" 
-                data-ua="DIVA <span class='text-red'>MODELS</span>">
-                DIVA <span class="text-red">MODELS</span>
-            </h1>
-            
-            <p class="hero-desc lang" 
-               data-ru="<strong>Diva Models</strong> — агентство, которое помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру.<br><br><strong>Мы создаём надёжное и комфортное пространство для девушек, которые хотят развиваться, зарабатывать и строить карьеру в индустрии</strong>"
-               data-ua="<strong>Diva Models</strong> — агенція, яка допомагає моделям знайти надійну та вигідну співпрацю з <strong>OnlyFans-агенціями</strong> по всьому світу.<br><br><strong>Ми створюємо надійний та комфортний простір для дівчат, які прагнуть розвиватися, заробляти та будувати кар'єру в індустрії</strong>">
-                <strong>Diva Models</strong> — агентство, которое помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру.<br><br>
-                <strong>Мы создаём надёжное и комфортное пространство для девушек, которые хотят развиваться, зарабатывать и строить карьеру в индустрии</strong>
-            </p>
-            
-            <div class="buttons">
-                <a href="https://t.me/Diva_ManagerOF" class="btn-primary lang" data-ru="Стать моделью" data-ua="Стати моделлю" target="_blank">Стать моделью</a>
-                <a href="#about" class="btn-outline lang" data-ru="Узнать подробнее" data-ua="Дізнатися більше">Узнать подробнее</a>
-            </div>
-        </div>
-        <div class="red-glow-bg"></div>
-    </section>
-
-    <section class="about" id="about">
-        <div class="container about-content">
-            <div class="label lang" data-ru="О НАС" data-ua="ПРО НАС">О НАС</div>
-            <h2 class="section-title lang" 
-                data-ru="ВАШ УСПЕХ — <br><span class='text-red'>НАША ПРИОРИТЕТНАЯ ЦЕЛЬ</span>"
-                data-ua="ВАШ УСПІХ — <br><span class='text-red'>НАША ПРІОРИТЕТНА ЦІЛЬ</span>">
-                ВАШ УСПЕХ — <br><span class="text-red">НАША ПРИОРИТЕТНАЯ ЦЕЛЬ</span>
-            </h2>
-            
-            <p class="about-desc lang" 
-               data-ru="Сегодня с <strong>Diva Models</strong> сотрудничают более <strong>500</strong> агентств из <strong>Украины и Европы</strong>. Это позволяет нам находить <strong>индивидуальные и выгодные условия для каждой модели</strong>.<br><br>Мы <strong>более 3 лет</strong> успешно работаем и за это время выстроили сильную систему. В компании работает <strong>23 специалиста</strong>, обеспечивающих <strong>полный закрытый цикл услуг</strong> — от креатива до защиты данных."
-               data-ua="Сьогодні з <strong>Diva Models</strong> співпрацюють понад <strong>500</strong> агенцій з <strong>України та Європи</strong>. Це дозволяє нам знаходити <strong>індивідуальні та вигідні умови для кожної моделі</strong>.<br><br>Ми <strong>понад 3 роки</strong> успішно працюємо і за цей час вибудували потужну систему. У компанії працює <strong>23 фахівці</strong>, що забезпечують <strong>повний закритий цикл послуг</strong> — від креативу до захисту даних.">
-                Сегодня с <strong>Diva Models</strong> сотрудничают более <strong>500</strong> агентств из <strong>Украины и Европы</strong>. Это позволяет нам находить <strong>индивидуальные и выгодные условия для каждой модели</strong>.
-                <br><br>
-                Мы <strong>более 3 лет</strong> успешно работаем и за это время выстроили сильную систему. В компании работает <strong>23 специалиста</strong>, обеспечивающих <strong>полный закрытый цикл услуг</strong> — от креатива до защиты данных.
-            </p>
-
-            <div class="about-stats">
-                <div class="stat-item">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-text lang" data-ru="Агентств-партнеров" data-ua="Агенцій-партнерів">Агентств-партнеров</span>
-                </div>
-                <div class="stat-sep"></div>
-                <div class="stat-item">
-                    <span class="stat-number">700+</span>
-                    <span class="stat-text lang" data-ru="Успешных моделей" data-ua="Успішних моделей">Успешных моделей</span>
+    <main style="padding-top: 80px;"> <section class="hero" id="hero">
+            <div class="container hero-content">
+                <div class="label lang" data-ru="WORLDWIDE AGENCY" data-ua="ВСЕСВІТНЯ АГЕНЦІЯ">WORLDWIDE AGENCY</div>
+                <h1 class="lang" data-ru="DIVA <span class='text-red'>MODELS</span>" data-ua="DIVA <span class='text-red'>MODELS</span>">
+                    DIVA <span class="text-red">MODELS</span>
+                </h1>
+                <p class="hero-desc lang" 
+                   data-ru="<strong>Diva Models</strong> — агентство, которое помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру.<br><br><strong>Мы создаём надёжное и комфортное пространство для девушек, которые хотят развиваться, зарабатывать и строить карьеру в индустрии</strong>"
+                   data-ua="<strong>Diva Models</strong> — агенція, яка допомагає моделям знайти надійну та вигідну співпрацю з <strong>OnlyFans-агенціями</strong> по всьому світу.<br><br><strong>Ми створюємо надійний та комфортний простір для дівчат, які прагнуть розвиватися, заробляти та будувати кар'єру в індустрії</strong>">
+                    <strong>Diva Models</strong> — агентство, которое помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру.
+                </p>
+                <div class="buttons">
+                    <a href="https://t.me/Diva_ManagerOF" class="btn-primary lang" data-ru="Стать моделью" data-ua="Стати моделлю" target="_blank">Стать моделью</a>
+                    <a href="#about" class="btn-outline lang" data-ru="Узнать подробнее" data-ua="Дізнатися більше">Узнать подробнее</a>
                 </div>
             </div>
+            <div class="red-glow-bg"></div>
+        </section>
 
-            <div class="about-cta">
-                <a href="https://t.me/divareviewsss" class="btn-outline lang" data-ru="Наши кейсы" data-ua="Наші кейси" target="_blank">Наши кейсы</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="features" id="features">
-        <div class="container">
-            <div class="label lang" data-ru="ПРЕИМУЩЕСТВА" data-ua="ПЕРЕВАГИ">ПРЕИМУЩЕСТВА</div>
-            <h2 class="section-title lang" 
-                data-ru="ПОЧЕМУ ВЫБИРАЮТ <br><span class='text-red'>ИМЕННО НАС</span>"
-                data-ua="ЧОМУ ОБИРАЮТЬ <br><span class='text-red'>САМЕ НАС</span>">
-                ПОЧЕМУ ВЫБИРАЮТ <br><span class="text-red">ИМЕННО НАС</span>
-            </h2>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="card-line"></div>
-                    <h3 class="lang" data-ru="Полный подбор" data-ua="Повний підбір">Полный подбор</h3>
-                    <p class="lang" 
-                       data-ru="Мы берём на себя весь процесс поиска и подбора агентства — тебе остаётся только выбрать условия."
-                       data-ua="Ми беремо на себе весь процес пошуку та підбору агенції — тобі залишається лише обрати умови.">
-                       Мы берём на себя весь процесс поиска и подбора агентства — тебе остаётся только выбрать условия.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="card-line"></div>
-                    <h3 class="lang" data-ru="500+ Партнёров" data-ua="500+ Партнерів">500+ Партнёров</h3>
-                    <p class="lang" 
-                       data-ru="С нами сотрудничают агентства из Украины и других стран, подбираем условия для любого типажа."
-                       data-ua="З нами співпрацюють агенції з України та інших країн, підбираємо умови для будь-якого типажу.">
-                       С нами сотрудничают агентства из Украины и других стран, подбираем условия для любого типажа.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="card-line"></div>
-                    <h3 class="lang" data-ru="700+ Моделей" data-ua="700+ Моделей">700+ Моделей</h3>
-                    <p class="lang" 
-                       data-ru="Наш опыт подтверждён реальными результатами — модели уже начали зарабатывать, показывают стабильный рост и выходят на доход от $2 000."
-                       data-ua="Наш досвід підтверджений реальними результатами — моделі вже почали заробляти, демонструють стабільне зростання і виходять на дохід від $2 000.">
-                       Наш опыт подтверждён реальными результатами — модели уже начали зарабатывать, показывают стабильный рост и выходят на доход от $2 000.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="card-line"></div>
-                    <h3 class="lang" data-ru="Поддержка" data-ua="Підтримка">Поддержка</h3>
-                    <p class="lang" 
-                       data-ru="Мы всегда остаёмся на связи и помогаем решать любые вопросы: от восстановления страниц до консультаций."
-                       data-ua="Ми завжди залишаємося на зв'язку та допомагаємо вирішувати будь-які питання: від відновлення сторінок до консультацій.">
-                       Мы всегда остаёмся на связи и помогаем решать любые вопросы: от восстановления страниц до консультаций.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="card-line"></div>
-                    <h3 class="lang" data-ru="Безопасность" data-ua="Безпека">Безопасность</h3>
-                    <p class="lang" 
-                       data-ru="Diva Models — гарант того, что ты попадешь в проверенное агентство, а не в скам."
-                       data-ua="Diva Models — гарант того, що ти потрапиш до перевіреної агенції, а не до скаму.">
-                       Diva Models — гарант того, что ты попадешь в проверенное агентство, а не в скам.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="card-line"></div>
-                    <h3 class="lang" data-ru="Отзывы" data-ua="Відгуки">Отзывы</h3>
-                    <p class="lang" 
-                       data-ru="Ты можешь ознакомиться с реальными отзывами девушек, которые уже работают с нами."
-                       data-ua="Ти можеш ознайомитись із реальними відгуками дівчат, які вже працюють з нами.">
-                       Ты можешь ознакомиться с реальными отзывами девушек, которые уже работают с нами.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="steps" id="steps">
-        <div class="container">
-            <div class="label lang" data-ru="ПРОЦЕСС" data-ua="ПРОЦЕС">ПРОЦЕСС</div>
-            <h2 class="section-title lang" 
-                data-ru="КАК СТАТЬ МОДЕЛЬЮ <br>С <span class='text-red'>DIVA MODELS?</span>"
-                data-ua="ЯК СТАТИ МОДЕЛЛЮ <br>З <span class='text-red'>DIVA MODELS?</span>">
-                КАК СТАТЬ МОДЕЛЬЮ <br>С <span class="text-red">DIVA MODELS?</span>
-            </h2>
-            
-            <p class="steps-intro lang" data-ru="4 простых шага к результату:" data-ua="4 прості кроки до результату:">4 простых шага к результату:</p>
-
-            <div class="steps-container">
-                <div class="step-item">
-                    <div class="step-circle">1</div>
-                    <div class="step-info">
-                        <h3 class="lang" data-ru="Собеседование" data-ua="Співбесіда">Собеседование</h3>
-                        <p class="lang" 
-                           data-ru="Оформляем анкету, чтобы понять твои цели, типаж и условия."
-                           data-ua="Оформляємо анкету, щоб зрозуміти твої цілі, типаж та умови.">
-                           Оформляем анкету, чтобы понять твои цели, типаж и условия.
-                        </p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-circle">2</div>
-                    <div class="step-info">
-                        <h3 class="lang" data-ru="Подбор" data-ua="Підбір">Подбор</h3>
-                        <p class="lang" 
-                           data-ru="Мы находим и проверяем лучшие варианты агентств под твой запрос."
-                           data-ua="Ми знаходимо та перевіряємо найкращі варіанти агенцій під твій запит.">
-                           Мы находим и проверяем лучшие варианты агентств под твой запрос.
-                        </p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-circle">3</div>
-                    <div class="step-info">
-                        <h3 class="lang" data-ru="Выбор" data-ua="Вибір">Выбор</h3>
-                        <p class="lang" 
-                           data-ru="Ты выбираешь условия, подходящие твоему графику и формату."
-                           data-ua="Ти обираєш умови, що підходять твоєму графіку та формату.">
-                           Ты выбираешь условия, подходящие твоему графику и формату.
-                        </p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-circle">4</div>
-                    <div class="step-info">
-                        <h3 class="lang" data-ru="Старт" data-ua="Старт">Старт</h3>
-                        <p class="lang" 
-                           data-ru="Начинаешь работать с поддержкой Diva Models."
-                           data-ua="Починаєш працювати з підтримкою Diva Models.">
-                           Начинаешь работать с поддержкой Diva Models.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="steps-cta">
-                <a href="https://t.me/Diva_ManagerOF" class="btn-primary lang" data-ru="Пройти собеседование" data-ua="Пройти співбесіду" target="_blank">Пройти собеседование</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="services" id="services">
-        <div class="container">
-            <div class="label lang" data-ru="УСЛУГИ ONLYFANS-АГЕНТСТВА" data-ua="ПОСЛУГИ ONLYFANS-АГЕНЦІЇ">УСЛУГИ ONLYFANS-АГЕНТСТВА</div>
-            <h2 class="section-title lang" 
-                data-ru="ПОЛНЫЙ ЦИКЛ <span class='text-red'>MANAGEMENT</span>"
-                data-ua="ПОВНИЙ ЦИКЛ <span class='text-red'>MANAGEMENT</span>">
-                ПОЛНЫЙ ЦИКЛ <span class="text-red">MANAGEMENT</span>
-            </h2>
-
-            <div class="services-list">
-                <div class="service-item">
-                    <div class="service-header">
-                        <span class="service-dot"></span>
-                        <h3 class="lang" data-ru="Чаттинг 24/7" data-ua="Чаттинг 24/7">Чаттинг 24/7</h3>
-                    </div>
-                    <p class="lang" 
-                       data-ru="Команда профессиональных чаттеров увеличивает продажи и удерживает подписчиков круглосуточно."
-                       data-ua="Команда професійних чаттерів збільшує продажі та утримує підписників цілодобово.">
-                       Команда профессиональных чаттеров увеличивает продажи и удерживает подписчиков круглосуточно.
-                    </p>
-                </div>
-                <div class="service-item">
-                    <div class="service-header">
-                        <span class="service-dot"></span>
-                        <h3 class="lang" data-ru="Контент-стратегия" data-ua="Контент-стратегія">Контент-стратегия</h3>
-                    </div>
-                    <p class="lang" 
-                       data-ru="Планирование публикаций, сценарии, структура профиля. Мы знаем, что и как снимать."
-                       data-ua="Планування публікацій, сценарії, структура профілю. Ми знаємо, що і як знімати.">
-                       Планирование публикаций, сценарии, структура профиля. Мы знаем, что и как снимать.
-                    </p>
-                </div>
-                <div class="service-item">
-                    <div class="service-header">
-                        <span class="service-dot"></span>
-                        <h3 class="lang" data-ru="Управление аккаунтом" data-ua="Управління акаунтом">Управление аккаунтом</h3>
-                    </div>
-                    <p class="lang" 
-                       data-ru="Ведение профиля, постинг, PPV, расценки, аналитика и полный операционный менеджмент."
-                       data-ua="Ведення профілю, постинг, PPV, розцінки, аналітика та повний операційний менеджмент.">
-                       Ведение профиля, постинг, PPV, расценки, аналитика и полный операционный менеджмент.
-                    </p>
-                </div>
-                <div class="service-item">
-                    <div class="service-header">
-                        <span class="service-dot"></span>
-                        <h3 class="lang" data-ru="Маркетинг" data-ua="Маркетинг">Маркетинг</h3>
-                    </div>
-                    <p class="lang" 
-                       data-ru="Shoutouts, реклама, TikTok, Reels, Dating. Приводим платежеспособный трафик."
-                       data-ua="Shoutouts, реклама, TikTok, Reels, Dating. Приводимо платоспроможний трафік.">
-                       Shoutouts, реклама, TikTok, Reels, Dating. Приводим платежеспособный трафик.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="benefits" id="benefits">
-        <div class="container">
-            <div class="label lang" data-ru="ДЛЯ МОДЕЛЕЙ" data-ua="ДЛЯ МОДЕЛЕЙ">ДЛЯ МОДЕЛЕЙ</div>
-            <h2 class="section-title lang" 
-                data-ru="ПРЕИМУЩЕСТВА <br>РАБОТЫ <span class='text-red'>С НАМИ</span>"
-                data-ua="ПЕРЕВАГИ <br>РОБОТИ <span class='text-red'>З НАМИ</span>">
-                ПРЕИМУЩЕСТВА <br>РАБОТЫ <span class="text-red">С НАМИ</span>
-            </h2>
-
-            <div class="benefits-container">
-                <div class="benefit-row">
-                    <div class="benefit-main"><strong class="lang" data-ru="Высокий процент" data-ua="Високий відсоток">Высокий процент</strong></div>
-                    <div class="benefit-detail lang" 
-                         data-ru="Доход модели от <span class='text-red'>20% до 30%</span>"
-                         data-ua="Дохід моделі від <span class='text-red'>20% до 30%</span>">
-                         Доход модели от <span class="text-red">20% до 30%</span>
-                    </div>
-                </div>
-                <div class="benefit-row">
-                    <div class="benefit-main"><strong class="lang" data-ru="Личная команда" data-ua="Особиста команда">Личная команда</strong></div>
-                    <div class="benefit-detail lang" 
-                         data-ru="Контент-менеджер, сценарист, Тим-лид"
-                         data-ua="Контент-менеджер, сценарист, Тім-лід">
-                         Контент-менеджер, сценарист, Тим-лид
-                    </div>
-                </div>
-                <div class="benefit-row">
-                    <div class="benefit-main"><strong class="lang" data-ru="Конфиденциальность" data-ua="Конфіденційність">Конфиденциальность</strong></div>
-                    <div class="benefit-detail lang" 
-                         data-ru="Гарантия анонимности и защиты данных"
-                         data-ua="Гарантія анонімності та захисту даних">
-                         Гарантия анонимности и защиты данных
-                    </div>
-                </div>
-                <div class="benefit-row">
-                    <div class="benefit-main"><strong class="lang" data-ru="Быстрый рост" data-ua="Швидке зростання">Быстрый рост</strong></div>
-                    <div class="benefit-detail lang" 
-                         data-ru="Увеличиваем заработок в <span class='text-red'>2-5 раз</span>"
-                         data-ua="Збільшуємо заробіток у <span class='text-red'>2-5 разів</span>">
-                         Увеличиваем заработок в <span class="text-red">2-5 раз</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="benefits-cta">
-                <div class="double-buttons">
-                    <a href="https://t.me/Diva_ManagerOF" class="btn-primary lang" data-ru="Связаться" data-ua="Зв'язатися" target="_blank">Связаться</a>
-                    <a href="https://t.me/divareviewsss" class="btn-outline lang" data-ru="Кейсы" data-ua="Кейси" target="_blank">Кейсы</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="blog" id="blog" style="padding: 100px 0;">
-        <div class="container">
-            <div class="label lang" data-ru="ПОЛЕЗНОЕ" data-ua="КОРИСНЕ" style="text-align: center;">ПОЛЕЗНОЕ</div>
-            <h2 class="section-title lang" 
-                data-ru="БЛОГ ДЛЯ <span class='text-red'>МОДЕЛЕЙ И АГЕНТСТВ</span>"
-                data-ua="БЛОГ ДЛЯ <span class='text-red'>МОДЕЛЕЙ ТА АГЕНЦІЙ</span>"
-                style="text-align: center; margin-bottom: 30px;">
-                БЛОГ ДЛЯ <span class="text-red">МОДЕЛЕЙ И АГЕНТСТВ</span>
-            </h2>
-
-            <div style="text-align: center; margin-bottom: 50px;">
-                <a href="blog.html" class="btn-outline lang" data-ru="Читать весь блог" data-ua="Читати весь блог" style="font-size: 10px; padding: 12px 25px;">Читать весь блог</a>
-            </div>
-            
-            <div class="blog-grid" style="display: flex; flex-direction: column; gap: 30px; max-width: 800px; margin: 0 auto;">
+        <section class="about" id="about">
+            <div class="container about-content">
+                <div class="label lang" data-ru="О НАС" data-ua="ПРО НАС">О НАС</div>
+                <h2 class="section-title lang" 
+                    data-ru="ВАШ УСПЕХ — <br><span class='text-red'>НАША ПРИОРИТЕТНАЯ ЦЕЛЬ</span>"
+                    data-ua="ВАШ УСПІХ — <br><span class='text-red'>НАША ПРІОРИТЕТНА ЦІЛЬ</span>">
+                    ВАШ УСПЕХ — <br><span class="text-red">НАША ПРИОРИТЕТНАЯ ЦЕЛЬ</span>
+                </h2>
                 
-                <article class="blog-card reveal" style="width: 100%; text-align: left;">
-                    <div class="blog-date lang" data-ru="19 ЯНВ 2026" data-ua="19 СІЧ 2026">19 ЯНВ 2026</div>
-                    <h3 class="lang" 
-                        data-ru="ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?"
-                        data-ua="ФЕЙК-АГЕНЦІЇ: хто насправді тобі пише?"
-                        style="font-size: 24px; margin: 15px 0;">
-                        ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?
-                    </h3>
-                    <p class="lang" 
-                       data-ru="Рекрутинг здорового человека: почему лже-скауты губят карьеру модели!"
-                       data-ua="Рекрутинг здорової людини: чому лже-скаути гублять кар'єру моделі!"
-                       style="color: var(--gray-text); line-height: 1.6;">
-                       Рекрутинг здорового человека: почему лже-скауты губят карьеру модели!
-                    </p>
-                    <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
-                </article>          
+                <p class="about-desc lang" 
+                   data-ru="Сегодня с <strong>Diva Models</strong> сотрудничают более <strong>500</strong> агентств из <strong>Украины и Европы</strong>. Это позволяет нам находить <strong>индивидуальные и выгодные условия для каждой модели</strong>.<br><br>Мы <strong>более 3 лет</strong> успешно работаем и за это время выстроили сильную систему. В компании работает <strong>23 специалиста</strong>, обеспечивающих <strong>полный закрытый цикл услуг</strong> — от креатива до защиты данных."
+                   data-ua="Сьогодні з <strong>Diva Models</strong> співпрацюють понад <strong>500</strong> агенцій з <strong>України та Європи</strong>. Це дозволяє нам знаходити <strong>індивідуальні та вигідні умови для кожної моделі</strong>.<br><br>Ми <strong>понад 3 роки</strong> успішно працюємо і за цей час вибудували потужну систему. У компанії працює <strong>23 фахівці</strong>, що забезпечують <strong>повний закритий цикл послуг</strong> — від креативу до захисту даних.">
+                    Сегодня с Diva Models сотрудничают более 500 агентств...
+                </p>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-text lang" data-ru="Агентств-партнеров" data-ua="Агенцій-партнерів">Агентств-партнеров</span>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">700+</span>
+                        <span class="stat-text lang" data-ru="Успешных моделей" data-ua="Успішних моделей">Успешных моделей</span>
+                    </div>
+                </div>
+
+                <div class="about-cta">
+                    <a href="https://t.me/divareviewsss" class="btn-outline lang" data-ru="Наши кейсы" data-ua="Наші кейси" target="_blank">Наши кейсы</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <div class="label lang" data-ru="ПРЕИМУЩЕСТВА" data-ua="ПЕРЕВАГИ">ПРЕИМУЩЕСТВА</div>
+                <h2 class="section-title lang" 
+                    data-ru="ПОЧЕМУ ВЫБИРАЮТ <br><span class='text-red'>ИМЕННО НАС</span>"
+                    data-ua="ЧОМУ ОБИРАЮТЬ <br><span class='text-red'>САМЕ НАС</span>">
+                    ПОЧЕМУ ВЫБИРАЮТ <br><span class="text-red">ИМЕННО НАС</span>
+                </h2>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="card-line"></div>
+                        <h3 class="lang" data-ru="Полный подбор" data-ua="Повний підбір">Полный подбор</h3>
+                        <p class="lang" data-ru="Мы берём на себя весь процесс поиска и подбора агентства — тебе остаётся только выбрать условия." data-ua="Ми беремо на себе весь процес пошуку та підбору агенції — тобі залишається лише обрати умови.">Мы берём на себя весь процесс поиска...</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-line"></div>
+                        <h3 class="lang" data-ru="500+ Партнёров" data-ua="500+ Партнерів">500+ Партнёров</h3>
+                        <p class="lang" data-ru="С нами сотрудничают агентства из Украины и других стран, подбираем условия для любого типажа." data-ua="З нами співпрацюють агенції з України та інших країн, підбираємо умови для будь-якого типажу.">С нами сотрудничают агентства...</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-line"></div>
+                        <h3 class="lang" data-ru="700+ Моделей" data-ua="700+ Моделей">700+ Моделей</h3>
+                        <p class="lang" data-ru="Наш опыт подтверждён реальными результатами — модели уже начали зарабатывать, показывают стабильный рост." data-ua="Наш досвід підтверджений реальними результатами — моделі вже почали заробляти, демонструють стабільне зростання.">Наш опыт подтверждён реальными результатами...</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-line"></div>
+                        <h3 class="lang" data-ru="Поддержка" data-ua="Підтримка">Поддержка</h3>
+                        <p class="lang" data-ru="Мы всегда остаёмся на связи и помогаем решать любые вопросы." data-ua="Ми завжди залишаємося на зв'язку та допомагаємо вирішувати будь-які питання.">Мы всегда остаёмся на связи...</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-line"></div>
+                        <h3 class="lang" data-ru="Безопасность" data-ua="Безпека">Безопасность</h3>
+                        <p class="lang" data-ru="Diva Models — гарант того, что ты попадешь в проверенное агентство, а не в скам." data-ua="Diva Models — гарант того, що ти потрапиш до перевіреної агенції, а не до скаму.">Diva Models — гарант безопасности...</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-line"></div>
+                        <h3 class="lang" data-ru="Отзывы" data-ua="Відгуки">Отзывы</h3>
+                        <p class="lang" data-ru="Ты можешь ознакомиться с реальными отзывами девушек." data-ua="Ти можеш ознайомитись із реальними відгуками дівчат.">Ты можешь ознакомиться с реальными отзывами...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="steps" id="steps">
+            <div class="container">
+                <div class="label lang" data-ru="ПРОЦЕСС" data-ua="ПРОЦЕС">ПРОЦЕСС</div>
+                <h2 class="section-title lang" 
+                    data-ru="КАК СТАТЬ МОДЕЛЬЮ <br>С <span class='text-red'>DIVA MODELS?</span>"
+                    data-ua="ЯК СТАТИ МОДЕЛЛЮ <br>З <span class='text-red'>DIVA MODELS?</span>">
+                    КАК СТАТЬ МОДЕЛЬЮ <br>С <span class="text-red">DIVA MODELS?</span>
+                </h2>
                 
-                <article class="blog-card reveal" style="width: 100%; text-align: left;">
-                    <div class="blog-date lang" data-ru="27 ДЕК 2025" data-ua="27 ГРУ 2025">27 ДЕК 2025</div>
-                    <h3 class="lang" 
-                        data-ru="Сколько получает модель?"
-                        data-ua="Скільки отримує модель?"
-                        style="font-size: 24px; margin: 15px 0;">
-                        Сколько получает модель?
-                    </h3>
-                    <p class="lang" 
-                       data-ru="Разбор деления прибыли, влияния трафика и условий для начинающих моделей. Почему процент — это динамика."
-                       data-ua="Розбір розподілу прибутку, впливу трафіку та умов для моделей-початківців. Чому відсоток — це динаміка."
-                       style="color: var(--gray-text); line-height: 1.6;">
-                       Разбор деления прибыли, влияния трафика и условий для начинающих моделей. Почему процент — это динамика.
-                    </p>
-                    <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
-                </article>
+                <p class="steps-intro lang" data-ru="4 простых шага к результату:" data-ua="4 прості кроки до результату:">4 простых шага к результату:</p>
 
-                <article class="blog-card reveal" style="width: 100%; text-align: left;">
-                    <div class="blog-date lang" data-ru="20 ДЕК 2025" data-ua="20 ГРУ 2025">20 ДЕК 2025</div>
-                    <h3 class="lang" 
-                        data-ru="Агентство или Соло?"
-                        data-ua="Агенція чи Соло?"
-                        style="font-size: 24px; margin: 15px 0;">
-                        Агентство или Соло?
-                    </h3>
-                    <p class="lang" 
-                       data-ru="Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков, анализируя бизнес-процессы."
-                       data-ua="Чесний розбір плюсів та мінусів. Розбираємо, де більше грошей і менше ризиків, аналізуючи бізнес-процеси."
-                       style="color: var(--gray-text); line-height: 1.6;">
-                       Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков, анализируя бизнес-процессы.
-                    </p>
-                    <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
-                </article>
-
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-circle">1</div>
+                        <div class="step-info">
+                            <h3 class="lang" data-ru="Собеседование" data-ua="Співбесіда">Собеседование</h3>
+                            <p class="lang" data-ru="Оформляем анкету, чтобы понять твои цели, типаж и условия." data-ua="Оформляємо анкету, щоб зрозуміти твої цілі, типаж та умови.">Оформляем анкету...</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-circle">2</div>
+                        <div class="step-info">
+                            <h3 class="lang" data-ru="Подбор" data-ua="Підбір">Подбор</h3>
+                            <p class="lang" data-ru="Мы находим и проверяем лучшие варианты агентств под твой запрос." data-ua="Ми знаходимо та перевіряємо найкращі варіанти агенцій під твій запит.">Мы находим лучшие варианты...</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-circle">3</div>
+                        <div class="step-info">
+                            <h3 class="lang" data-ru="Выбор" data-ua="Вибір">Выбор</h3>
+                            <p class="lang" data-ru="Ты выбираешь условия, подходящие твоему графику и формату." data-ua="Ти обираєш умови, що підходять твоєму графіку та формату.">Ты выбираешь условия...</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-circle">4</div>
+                        <div class="step-info">
+                            <h3 class="lang" data-ru="Старт" data-ua="Старт">Старт</h3>
+                            <p class="lang" data-ru="Начинаешь работать с поддержкой Diva Models." data-ua="Починаєш працювати з підтримкою Diva Models.">Начинаешь работать...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="steps-cta">
+                    <a href="https://t.me/Diva_ManagerOF" class="btn-primary lang" data-ru="Пройти собеседование" data-ua="Пройти співбесіду" target="_blank">Пройти собеседование</a>
+                </div>
             </div>
+        </section>
 
-            <div style="margin-top: 60px; text-align: center;">
-                <a href="blog.html" class="btn-outline lang" data-ru="Читать весь блог" data-ua="Читати весь блог">Читать весь блог</a>
+        <section class="services" id="services">
+            <div class="container">
+                <div class="label lang" data-ru="УСЛУГИ ONLYFANS-АГЕНТСТВА" data-ua="ПОСЛУГИ ONLYFANS-АГЕНЦІЇ">УСЛУГИ ONLYFANS-АГЕНТСТВА</div>
+                <h2 class="section-title lang" 
+                    data-ru="ПОЛНЫЙ ЦИКЛ <span class='text-red'>MANAGEMENT</span>"
+                    data-ua="ПОВНИЙ ЦИКЛ <span class='text-red'>MANAGEMENT</span>">
+                    ПОЛНЫЙ ЦИКЛ <span class="text-red">MANAGEMENT</span>
+                </h2>
+
+                <div class="services-list">
+                    <div class="service-item">
+                        <div class="service-header"><span class="service-dot"></span><h3 class="lang" data-ru="Чаттинг 24/7" data-ua="Чаттинг 24/7">Чаттинг 24/7</h3></div>
+                        <p class="lang" data-ru="Команда профессиональных чаттеров увеличивает продажи круглосуточно." data-ua="Команда професійних чаттерів збільшує продажі цілодобово.">Команда профессиональных чаттеров...</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-header"><span class="service-dot"></span><h3 class="lang" data-ru="Контент-стратегия" data-ua="Контент-стратегія">Контент-стратегия</h3></div>
+                        <p class="lang" data-ru="Планирование публикаций, сценарии, структура профиля." data-ua="Планування публікацій, сценарії, структура профілю.">Планирование публикаций...</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-header"><span class="service-dot"></span><h3 class="lang" data-ru="Управление аккаунтом" data-ua="Управління акаунтом">Управление аккаунтом</h3></div>
+                        <p class="lang" data-ru="Ведение профиля, постинг, PPV, расценки, аналитика." data-ua="Ведення профілю, постинг, PPV, розцінки, аналітика.">Ведение профиля...</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-header"><span class="service-dot"></span><h3 class="lang" data-ru="Маркетинг" data-ua="Маркетинг">Маркетинг</h3></div>
+                        <p class="lang" data-ru="Shoutouts, реклама, TikTok, Reels, Dating." data-ua="Shoutouts, реклама, TikTok, Reels, Dating.">Shoutouts, реклама, TikTok...</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="benefits" id="benefits">
+            <div class="container">
+                <div class="label lang" data-ru="ДЛЯ МОДЕЛЕЙ" data-ua="ДЛЯ МОДЕЛЕЙ">ДЛЯ МОДЕЛЕЙ</div>
+                <h2 class="section-title lang" 
+                    data-ru="ПРЕИМУЩЕСТВА <br>РАБОТЫ <span class='text-red'>С НАМИ</span>"
+                    data-ua="ПЕРЕВАГИ <br>РОБОТИ <span class='text-red'>З НАМИ</span>">
+                    ПРЕИМУЩЕСТВА <br>РАБОТЫ <span class="text-red">С НАМИ</span>
+                </h2>
+
+                <div class="benefits-container">
+                    <div class="benefit-row">
+                        <div class="benefit-main"><strong class="lang" data-ru="Высокий процент" data-ua="Високий відсоток">Высокий процент</strong></div>
+                        <div class="benefit-detail lang" data-ru="Доход модели от <span class='text-red'>20% до 30%</span>" data-ua="Дохід моделі від <span class='text-red'>20% до 30%</span>">Доход модели от <span class="text-red">20% до 30%</span></div>
+                    </div>
+                    <div class="benefit-row">
+                        <div class="benefit-main"><strong class="lang" data-ru="Личная команда" data-ua="Особиста команда">Личная команда</strong></div>
+                        <div class="benefit-detail lang" data-ru="Контент-менеджер, сценарист, Тим-лид" data-ua="Контент-менеджер, сценарист, Тім-лід">Контент-менеджер, сценарист...</div>
+                    </div>
+                    <div class="benefit-row">
+                        <div class="benefit-main"><strong class="lang" data-ru="Конфиденциальность" data-ua="Конфіденційність">Конфиденциальность</strong></div>
+                        <div class="benefit-detail lang" data-ru="Гарантия анонимности и защиты данных" data-ua="Гарантія анонімності та захисту даних">Гарантия анонимности...</div>
+                    </div>
+                </div>
+
+                <div class="benefits-cta">
+                    <div class="double-buttons">
+                        <a href="https://t.me/Diva_ManagerOF" class="btn-primary lang" data-ru="Связаться" data-ua="Зв'язатися" target="_blank">Связаться</a>
+                        <a href="https://t.me/divareviewsss" class="btn-outline lang" data-ru="Кейсы" data-ua="Кейси" target="_blank">Кейсы</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog" id="blog" style="padding: 100px 0;">
+            <div class="container">
+                <div class="label lang" data-ru="ПОЛЕЗНОЕ" data-ua="КОРИСНЕ" style="text-align: center;">ПОЛЕЗНОЕ</div>
+                <h2 class="section-title lang" 
+                    data-ru="БЛОГ ДЛЯ <span class='text-red'>МОДЕЛЕЙ И АГЕНТСТВ</span>"
+                    data-ua="БЛОГ ДЛЯ <span class='text-red'>МОДЕЛЕЙ ТА АГЕНЦІЙ</span>"
+                    style="text-align: center; margin-bottom: 30px;">
+                    БЛОГ ДЛЯ <span class="text-red">МОДЕЛЕЙ И АГЕНТСТВ</span>
+                </h2>
+
+                <div style="text-align: center; margin-bottom: 50px;">
+                    <a href="blog.html" class="btn-outline lang" data-ru="Читать весь блог" data-ua="Читати весь блог" style="font-size: 10px; padding: 12px 25px;">Читать весь блог</a>
+                </div>
+                
+                <div class="blog-grid" style="display: flex; flex-direction: column; gap: 30px; max-width: 800px; margin: 0 auto;">
+                    <article class="blog-card reveal" style="width: 100%; text-align: left;">
+                        <div class="blog-date lang" data-ru="19 ЯНВ 2026" data-ua="19 СІЧ 2026">19 ЯНВ 2026</div>
+                        <h3 class="lang" data-ru="ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?" data-ua="ФЕЙК-АГЕНЦІЇ: хто насправді тобі пише?">ФЕЙК-АГЕНТСТВА: кто на самом деле тебе пишет?</h3>
+                        <p class="lang" data-ru="Рекрутинг здорового человека: почему лже-скауты губят карьеру модели!" data-ua="Рекрутинг здорової людини: чому лже-скаути гублять кар'єру моделі!">Рекрутинг здорового человека...</p>
+                        <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
+                    </article>          
+                    <article class="blog-card reveal" style="width: 100%; text-align: left;">
+                        <div class="blog-date lang" data-ru="27 ДЕК 2025" data-ua="27 ГРУ 2025">27 ДЕК 2025</div>
+                        <h3 class="lang" data-ru="Сколько получает модель?" data-ua="Скільки отримує модель?">Сколько получает модель?</h3>
+                        <p class="lang" data-ru="Разбор деления прибыли, влияния трафика и условий для начинающих моделей." data-ua="Розбір розподілу прибутку, впливу трафіку та умов для моделей-початківців.">Разбор деления прибыли...</p>
+                        <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
+                    </article>
+                    <article class="blog-card reveal" style="width: 100%; text-align: left;">
+                        <div class="blog-date lang" data-ru="20 ДЕК 2025" data-ua="20 ГРУ 2025">20 ДЕК 2025</div>
+                        <h3 class="lang" data-ru="Агентство или Соло?" data-ua="Агенція чи Соло?">Агентство или Соло?</h3>
+                        <p class="lang" data-ru="Честный разбор плюсов и минусов. Разбираем, где больше денег и меньше рисков." data-ua="Чесний розбір плюсів та мінусів. Розбираємо, де більше грошей і менше ризиків.">Честный разбор плюсов и минусов...</p>
+                        <a href="blog.html" class="blog-link lang" data-ru="Подробнее в блоге →" data-ua="Детальніше у блозі →" style="margin-top: 20px; display: inline-block;">Подробнее в блоге →</a>
+                    </article>
+                </div>
+
+                <div style="margin-top: 60px; text-align: center;">
+                    <a href="blog.html" class="btn-outline lang" data-ru="Читать весь блог" data-ua="Читати весь блог">Читать весь блог</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -557,7 +482,6 @@
             const menu = document.getElementById('mainNav');
             const burger = document.querySelector('.burger-menu');
             
-            // Переключаем класс active
             menu.classList.toggle('active');
             burger.classList.toggle('active');
         }
@@ -566,7 +490,6 @@
             const menu = document.getElementById('mainNav');
             const burger = document.querySelector('.burger-menu');
             
-            // Убираем класс active (закрываем меню)
             menu.classList.remove('active');
             burger.classList.remove('active');
         }
@@ -575,6 +498,7 @@
         function setLanguage(lang) {
             localStorage.setItem('diva_lang', lang);
 
+            // Меняем текст везде
             document.querySelectorAll('.lang').forEach(el => {
                 const text = el.getAttribute(`data-${lang}`);
                 if (text) {
@@ -582,8 +506,17 @@
                 }
             });
 
-            document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
-            document.getElementById('btn-ua').classList.toggle('active', lang === 'ua');
+            // Обновляем подсветку кнопок
+            const btnRu = document.getElementById('btn-ru');
+            const btnUa = document.getElementById('btn-ua');
+
+            if (lang === 'ru') {
+                btnRu.classList.add('active');
+                btnUa.classList.remove('active');
+            } else {
+                btnUa.classList.add('active');
+                btnRu.classList.remove('active');
+            }
         }
 
         // --- ФУНКЦИЯ АНИМАЦИИ ПРИ СКРОЛЛЕ ---
