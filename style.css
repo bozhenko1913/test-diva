@@ -773,28 +773,55 @@ section { padding: 120px 0; text-align: center; border-bottom: 1px solid rgba(25
 }
 /* ДОБАВИТЬ В САМЫЙ КОНЕЦ style.css */
 
+/* --- УНИКАЛЬНЫЕ ФОНЫ ДЛЯ СЕКЦИЙ (ТОЛЬКО МОБИЛЬНЫЕ) --- */
 @media (max-width: 768px) {
-    /* Поскольку меню на телефоне стало высоким (в столбик),
-       делаем большой отступ сверху для главного экрана */
-    .hero {
-        padding-top: 220px !important; /* Увеличили отступ, чтобы текст было видно */
+
+    /* Общие настройки для всех секций на телефоне */
+    section {
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll; /* На телефонах лучше scroll, чтобы не глючило */
     }
-    
-    /* Можно немного уменьшить шрифт заголовка, чтобы он лучше влезал */
-    .hero h1 {
-        font-size: 2rem;
-        margin-top: 20px;
+
+    /* 1. ГЛАВНЫЙ ЭКРАН (Hero) */
+    #hero {
+        /* Замените mob-1.jpg на вашу картинку */
+        background-image: linear-gradient(rgba(0,0,0,0.5), #000), url('mob-1.jpg') !important;
     }
-}
-/* Стили для анимации появления */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+
+    /* 2. О НАС (#about) */
+    #about {
+        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mob-2.jpg');
+    }
+
+    /* 3. ПРЕИМУЩЕСТВА (#features) */
+    #features {
+        background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('mob-3.jpg');
+    }
+
+    /* 4. ПРОЦЕСС/ШАГИ (#steps) */
+    #steps {
+        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mob-4.jpg');
+    }
+
+    /* 5. УСЛУГИ (#services) */
+    #services {
+        background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('mob-5.jpg');
+    }
+
+    /* 6. ВЫГОДЫ ДЛЯ МОДЕЛЕЙ (#benefits) */
+    #benefits {
+        background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('mob-6.jpg');
+    }
+
+    /* 7. БЛОГ (#blog) */
+    #blog {
+        background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('mob-7.jpg');
+        background-size: cover;
+    }
 }
 
-/* Класс, который будет добавляться скриптом при докрутке */
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
+
+
+
