@@ -792,35 +792,36 @@ section { padding: 120px 0; text-align: center; border-bottom: 1px solid rgba(25
 
     /* 2. О НАС (#about) */
     #about {
-        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mob-2.jpg');
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-2.jpg');
     }
 
     /* 3. ПРЕИМУЩЕСТВА (#features) */
     #features {
-        background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('mob-3.jpg');
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-3.jpg');
     }
 
     /* 4. ПРОЦЕСС/ШАГИ (#steps) */
     #steps {
-        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mob-4.jpg');
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-4.jpg');
     }
 
     /* 5. УСЛУГИ (#services) */
     #services {
-        background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('mob-5.jpg');
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-5.jpg');
     }
 
     /* 6. ВЫГОДЫ ДЛЯ МОДЕЛЕЙ (#benefits) */
     #benefits {
-        background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('mob-6.jpg');
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-6.jpg');
     }
 
     /* 7. БЛОГ (#blog) */
     #blog {
-        background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('mob-7.jpg');
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-7.jpg');
         background-size: cover;
     }
 }
+
 
 
 
