@@ -789,40 +789,4 @@ section { padding: 120px 0; text-align: center; border-bottom: 1px solid rgba(25
         /* Замените mob-1.jpg на вашу картинку */
         background-image: linear-gradient(rgba(0,0,0,0.5), #000), url('mob-1.jpg') !important;
     }
-
-    /* 2. О НАС (#about) */
-    #about {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-2.jpg');
-    }
-
-    /* 3. ПРЕИМУЩЕСТВА (#features) */
-    #features {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-3.jpg');
-    }
-
-    /* 4. ПРОЦЕСС/ШАГИ (#steps) */
-    #steps {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-4.jpg');
-    }
-
-    /* 5. УСЛУГИ (#services) */
-    #services {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-5.jpg');
-    }
-
-    /* 6. ВЫГОДЫ ДЛЯ МОДЕЛЕЙ (#benefits) */
-    #benefits {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-6.jpg');
-    }
-
-    /* 7. БЛОГ (#blog) */
-    #blog {
-        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mob-7.jpg');
-        background-size: cover;
-    }
-}
-
-
-
-
-
+ }
