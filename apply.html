@@ -12,14 +12,24 @@
     </head>
 <body class="page-apply">
 
-    <header>
+   <header>
         <div class="container header-content">
             <a href="index.html" style="text-decoration: none;" class="logo">DIVA <span>MODELS</span></a>
+            
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html#about" class="lang" data-ru="О нас" data-ua="Про нас" onclick="closeMenu()">О нас</a>
+                <a href="index.html#features" class="lang" data-ru="Преимущества" data-ua="Переваги" onclick="closeMenu()">Преимущества</a>
+                <a href="index.html#services" class="lang" data-ru="Услуги" data-ua="Послуги" onclick="closeMenu()">Услуги</a>
+            </nav>
+
             <div class="nav-controls">
                 <div class="lang-switcher">
                     <span class="lang-btn active" id="btn-ru" onclick="setLanguage('ru')">RU</span>
                     <span class="lang-divider">|</span>
                     <span class="lang-btn" id="btn-ua" onclick="setLanguage('ua')">UA</span>
+                </div>
+                <div class="burger-menu" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
                 </div>
             </div>
         </div>
