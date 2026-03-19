@@ -235,7 +235,7 @@
                     <strong>Diva Models</strong> — агентство, которое помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру.
                 </p>
                 <div class="buttons">
-                    <a href="https://t.me/Diva_ManagerOF" class="btn-primary lang" data-ru="Стать моделью" data-ua="Стати моделлю" target="_blank">Стать моделью</a>
+                    <a href="#apply" class="btn-primary lang" data-ru="Стать моделью" data-ua="Стати моделлю">Стать моделью</a>
                     <a href="#about" class="btn-outline lang" data-ru="Узнать подробнее" data-ua="Дізнатися більше">Узнать подробнее</a>
                 </div>
             </div>
@@ -470,7 +470,44 @@
         </section>
 
     </main>
+<section class="apply-section" id="apply">
+            <div class="container">
+                <div class="apply-box">
+                    <div class="label lang" data-ru="ПРИСОЕДИНИТЬСЯ" data-ua="ПРИЄДНАТИСЯ" style="text-align: center;">ПРИСОЕДИНИТЬСЯ</div>
+                    <h2 class="section-title lang" 
+                        data-ru="СТАТЬ <span class='text-red'>МОДЕЛЬЮ</span>" 
+                        data-ua="СТАТИ <span class='text-red'>МОДЕЛЛЮ</span>" 
+                        style="text-align: center;">
+                        СТАТЬ <span class="text-red">МОДЕЛЬЮ</span>
+                    </h2>
+                    
+                    <p class="lang" style="text-align: center; color: var(--gray-text); margin-bottom: 40px; font-size: 15px; line-height: 1.6;"
+                       data-ru="Оставьте свои данные, и наш менеджер свяжется с вами в Telegram для обсуждения условий." 
+                       data-ua="Залиште свої дані, і наш менеджер зв'яжеться з вами в Telegram для обговорення умов.">
+                       Оставьте свои данные, и наш менеджер свяжется с вами в Telegram для обсуждения условий.
+                    </p>
 
+                       <form action="#" class="apply-form" id="tg-form">
+                        <div class="input-group">
+                            <input type="text" id="model_name" required placeholder=" ">
+                            <label for="model_name" class="lang" data-ru="Ваше имя" data-ua="Ваше ім'я">Ваше имя</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="tel" id="model_phone" required placeholder=" ">
+                            <label for="model_phone" class="lang" data-ru="Номер телефона" data-ua="Номер телефону">Номер телефона</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="model_tg" required placeholder=" ">
+                            <label for="model_tg" class="lang" data-ru="Ваш Telegram (@username)" data-ua="Ваш Telegram (@username)">Ваш Telegram (@username)</label>
+                        </div>
+
+                        <button type="submit" class="btn-primary lang" style="width: 100%; margin-top: 20px; text-align: center;" data-ru="Отправить заявку" data-ua="Відправити заявку">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </section>
     <footer class="footer">
         <div class="container">
             <div class="footer-top">
@@ -558,5 +595,67 @@
 
         window.addEventListener("scroll", reveal);
     </script>
+<script>
+    const tgForm = document.getElementById('tg-form');
+    
+    if(tgForm) {
+        tgForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Останавливаем перезагрузку страницы
+
+            // 1. ВСТАВЬТЕ СЮДА ВАШ ТОКЕН БОТА (между кавычками)
+            const TOKEN = "7216276855:AAHiVB9OTH9nmmyHQVixHuI25P5iyHu6wds"; 
+            
+            // 2. ВСТАВЬТЕ СЮДА ВАШ CHAT ID (между кавычками, с минусом, если это группа)
+            const CHAT_ID = "-1002276800723";
+            
+            const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+            // Собираем данные
+            const name = document.getElementById('model_name').value;
+            const phone = document.getElementById('model_phone').value;
+            const tg = document.getElementById('model_tg').value;
+
+            // Формируем текст сообщения для вас
+            let message = `🔥 <b>Новая заявка (DIVA MODELS)</b>\n\n`;
+            message += `👤 <b>Имя:</b> ${name}\n`;
+            message += `📞 <b>Телефон:</b> ${phone}\n`;
+            message += `✈️ <b>Telegram:</b> ${tg}`;
+
+            const btn = this.querySelector('button');
+            const originalBtnText = btn.innerText;
+            btn.innerText = "Отправка..."; 
+
+            // Отправляем
+            fetch(URI_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'html'
+                })
+            })
+            .then(res => {
+                if (res.ok) {
+                    btn.innerText = "✅ Успешно!";
+                    btn.style.background = "#28a745"; 
+                    btn.style.color = "#fff";
+                    this.reset(); // Очищаем форму
+                    setTimeout(() => {
+                        btn.innerText = originalBtnText;
+                        btn.style.background = "";
+                    }, 3000);
+                } else {
+                    alert("Ошибка отправки. Проверьте Токен и Chat ID.");
+                    btn.innerText = originalBtnText;
+                }
+            })
+            .catch(err => {
+                alert("Ошибка сети. Проверьте интернет.");
+                btn.innerText = originalBtnText;
+            });
+        });
+    }
+</script>
 </body>
 </html>
