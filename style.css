@@ -790,3 +790,74 @@ section { padding: 120px 0; text-align: center; border-bottom: 1px solid rgba(25
         background-image: linear-gradient(rgba(0,0,0,0.5), #000), url('mob-1.jpg') !important;
     }
  }
+/* --- СЕКЦИЯ ФОРМЫ НА ГЛАВНОЙ --- */
+.apply-section {
+    padding: 100px 0;
+    background: radial-gradient(circle at center, rgba(212, 29, 61, 0.05) 0%, transparent 70%);
+}
+
+.apply-box {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.apply-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 16px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    transition: 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.input-group label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    transition: 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Красивая анимация текста вверх */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: -12px;
+    font-size: 12px;
+    color: #d41d3d;
+}
+
+.input-group input:focus {
+    border-bottom-color: #d41d3d;
+}
+
+@media (max-width: 768px) {
+    .apply-box {
+        padding: 40px 25px;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+}
