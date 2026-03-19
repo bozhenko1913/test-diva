@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оставить заявку | DIVA MODELS</title>
+    
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    </head>
+<body class="page-apply">
+
+    <header>
+        <div class="container header-content">
+            <a href="index.html" style="text-decoration: none;" class="logo">DIVA <span>MODELS</span></a>
+            <div class="nav-controls">
+                <div class="lang-switcher">
+                    <span class="lang-btn active" id="btn-ru" onclick="setLanguage('ru')">RU</span>
+                    <span class="lang-divider">|</span>
+                    <span class="lang-btn" id="btn-ua" onclick="setLanguage('ua')">UA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="apply-section" style="padding: 150px 0 100px; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(212, 29, 61, 0.05) 0%, transparent 70%);">
+            <div class="container">
+                <div class="apply-box" style="background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 50px; max-width: 500px; width: 100%; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center;">
+                    <h1 class="lang" data-ru="СТАТЬ МОДЕЛЬЮ" data-ua="СТАТИ МОДЕЛЛЮ" style="font-family: 'Syncopate', sans-serif; font-size: 24px; margin-bottom: 15px; letter-spacing: 2px;">СТАТЬ МОДЕЛЬЮ</h1>
+                    <p class="lang" data-ru="Оставьте свои данные, и наш менеджер свяжется с вами в Telegram." data-ua="Залиште свої дані, і наш менеджер зв'яжеться з вами в Telegram." style="color: var(--gray-text); font-size: 14px; margin-bottom: 40px; line-height: 1.6;">
+                       Оставьте свои данные, и наш менеджер свяжется с вами в Telegram для обсуждения условий.
+                    </p>
+
+                    <form action="#" method="POST" id="tg-form" style="display: flex; flex-direction: column; gap: 30px; text-align: left;">
+                        <div class="input-group" style="position: relative;">
+                            <input type="text" id="model_name" required placeholder=" " style="width: 100%; padding: 15px 0; font-size: 16px; color: #fff; background: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); outline: none; transition: 0.3s ease; font-family: 'Montserrat', sans-serif;">
+                            <label for="model_name" class="lang" data-ru="Ваше имя" data-ua="Ваше ім'я" style="position: absolute; top: 15px; left: 0; font-size: 16px; color: rgba(255, 255, 255, 0.5); pointer-events: none; transition: 0.3s ease;">Ваше имя</label>
+                        </div>
+
+                        <div class="input-group" style="position: relative;">
+                            <input type="tel" id="model_phone" required placeholder=" " style="width: 100%; padding: 15px 0; font-size: 16px; color: #fff; background: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); outline: none; transition: 0.3s ease; font-family: 'Montserrat', sans-serif;">
+                            <label for="model_phone" class="lang" data-ru="Номер телефона" data-ua="Номер телефону" style="position: absolute; top: 15px; left: 0; font-size: 16px; color: rgba(255, 255, 255, 0.5); pointer-events: none; transition: 0.3s ease;">Номер телефона</label>
+                        </div>
+
+                        <div class="input-group" style="position: relative;">
+                            <input type="text" id="model_tg" required placeholder=" " style="width: 100%; padding: 15px 0; font-size: 16px; color: #fff; background: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); outline: none; transition: 0.3s ease; font-family: 'Montserrat', sans-serif;">
+                            <label for="model_tg" class="lang" data-ru="Ваш Telegram (@username)" data-ua="Ваш Telegram (@username)" style="position: absolute; top: 15px; left: 0; font-size: 16px; color: rgba(255, 255, 255, 0.5); pointer-events: none; transition: 0.3s ease;">Ваш Telegram (@username)</label>
+                        </div>
+
+                        <button type="submit" class="btn-primary lang" data-ru="Отправить заявку" data-ua="Відправити заявку" style="width: 100%; margin-top: 10px; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif;">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Языки
+        function setLanguage(lang) {
+            localStorage.setItem('diva_lang', lang);
+            document.querySelectorAll('.lang').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) el.innerHTML = text;
+            });
+            const btnRu = document.getElementById('btn-ru');
+            const btnUa = document.getElementById('btn-ua');
+            if (lang === 'ru') {
+                btnRu.classList.add('active'); btnUa.classList.remove('active');
+            } else {
+                btnUa.classList.add('active'); btnRu.classList.remove('active');
+            }
+        }
+        window.onload = () => { setLanguage(localStorage.getItem('diva_lang') || 'ru'); };
+
+        // Отправка в Телеграм, Пиксель и Переадресация
+        document.getElementById('tg-form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            // ВАШИ ДАННЫЕ ОТ БОТА
+            const TOKEN = "7216276855:AAHiVB9OTH9nmmyHQVixHuI25P5iyHu6wds"; 
+            const CHAT_ID = "-1002276800723";
+            
+            const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+            const name = document.getElementById('model_name').value;
+            const phone = document.getElementById('model_phone').value;
+            const tg = document.getElementById('model_tg').value;
+
+            let message = `🔥 <b>Новая заявка (DIVA MODELS)</b>\n\n👤 <b>Имя:</b> ${name}\n📞 <b>Телефон:</b> ${phone}\n✈️ <b>Telegram:</b> ${tg}`;
+            const btn = this.querySelector('button');
+            const originalBtnText = btn.innerText;
+            
+            btn.innerText = "Отправка..."; 
+
+            fetch(URI_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: 'html' })
+            })
+            .then(res => {
+                if (res.ok) {
+                    btn.innerText = "✅ Заявка отправлена!";
+                    btn.style.background = "#28a745"; 
+                    btn.style.color = "#fff";
+                    this.reset(); 
+                    
+                    // Отстукиваем Пиксель Фейсбука (Лид)
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'Lead'); 
+                    }
+                    
+                    // Перекидываем на главную через 2 секунды
+                    setTimeout(() => {
+                        window.location.href = "index.html"; 
+                    }, 2000);
+
+                } else {
+                    alert("Ошибка отправки. Проверьте настройки бота.");
+                    btn.innerText = originalBtnText;
+                }
+            })
+            .catch(err => {
+                alert("Ошибка сети.");
+                btn.innerText = originalBtnText;
+            });
+        });
+    </script>
+</body>
+</html>
