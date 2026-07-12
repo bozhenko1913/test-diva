@@ -251,8 +251,8 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
             
    <!-- Основное описание (добавили стиль margin-bottom: 5px) -->
 <p class="hero-desc lang" 
-   data-ru="<strong>Diva Models</strong> — агентство, которое помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру."
-   data-ua="<strong>Diva Models</strong> — агенція, яка допомагає моделям знайти надійну та вигідну співпрацю з <strong>OnlyFans-агенціями</strong> по всьому світу."
+   data-ru="Рекрутинговая компания, которая помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру."
+   data-ua="Рекрутингова компанія, яка допомагає моделям налагодити надійну та вигідну співпрацю з <strong>OnlyFans-агенціями</strong> по всьому світу."
    style="margin-bottom: 5px;">
     <strong>Diva Models</strong> — агентство, которое помогает моделям найти надёжное и выгодное сотрудничество с <strong>OnlyFans-агентствами</strong> по всему миру.
 </p>
@@ -261,7 +261,7 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
 <p class="lang" 
    data-ru="Выходи на доход от $2,000+ при создании контента из дома!" 
    data-ua="Виходь на дохід від $2,000+ при створенні контенту з дому!" 
-   style="color: #ffffff; font-size: 30px; font-weight: 600; margin-top: 0px; margin-bottom: 25px; text-align: center; opacity: 1;">
+   style="color: #ffffff; font-size: 28px; font-weight: 600; margin-top: 0px; margin-bottom: 25px; text-align: center; opacity: 1;">
    Выходи на доход от $2,000+ при создании контента из дома!
 </p>
 
@@ -742,7 +742,8 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
     <div class="container">
         <div class="calc-box">
             <h2 class="section-title lang" data-ru="РАССЧИТАЙ СВОЙ ПОТЕНЦИАЛЬНЫЙ ДОХОД" data-ua="РОЗРАХУЙ СВІЙ ПОТЕНЦІЙНИЙ ДОХІД">РАССЧИТАЙ СВОЙ ПОТЕНЦИАЛЬНЫЙ ДОХОД</h2>
-            <div class="calc-result" id="calc-result">$10 - $15</div>
+            <!-- Изменили стартовый текст на 18 000 - 22 000 -->
+            <div class="calc-result" id="calc-result">$18,000 - $22,000</div>
             <p class="calc-period lang" data-ru="в месяц" data-ua="на місяць">в месяц</p>
 
             <div class="calc-inputs">
@@ -798,8 +799,14 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
     const tabooLabel = document.getElementById('taboo-label');
     const resDisp = document.getElementById('calc-result');
 
-    const expMap = { 0: 0.8, 1: 1.0, 2: 1.5, 3: 2.2 };
-    // Переводы уровней
+    // Чистые проценты от общей суммы подписок по твоей логике
+    const expMap = { 
+        0: 0.20, // НОВИЧОК (20%)
+        1: 0.25, // РАСТУЩИЙ (25%)
+        2: 0.30, // СТАБИЛЬНЫЙ (30%)
+        3: 0.35  // ТОП-МОДЕЛЬ (35%)
+    };
+    
     const expNames = { 
         0: { ru: "НОВИЧОК", ua: "НОВАЧОК" }, 
         1: { ru: "РАСТУЩИЙ", ua: "ЗРОСТАЮЧИЙ" }, 
@@ -807,8 +814,14 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
         3: { ru: "ТОП-МОДЕЛЬ", ua: "ТОП-МОДЕЛЬ" } 
     };
     
-    const tabooMap = { 0: 0.1, 1: 0.8, 2: 1.0 };
-    // Переводы табу
+    // Модификаторы для ТАБУ (СТАНДАРТ = 1.0 — не меняет твои проценты)
+    const tabooMap = { 
+        0: 0.1,  // МНОГО (-90% от дохода)
+        1: 1.0,  // СТАНДАРТ (чистый расчет)
+        2: 1.1   // БЕЗ ТАБУ (+10% к доходу)
+    };
+
+    // ИСПРАВЛЕНО: Теперь тут правильная мультиязычная структура, и undefined пропадет
     const tabooNames = { 
         0: { ru: "МНОГО", ua: "БАГАТО" }, 
         1: { ru: "СТАНДАРТ", ua: "СТАНДАРТ" }, 
@@ -816,29 +829,35 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
     };
 
     function calculate() {
-        const lang = localStorage.getItem('diva_lang') || 'ru'; // Берем текущий язык
+        const lang = localStorage.getItem('diva_lang') || 'ru'; // Подхватываем активный язык сайта
         const f = parseInt(followers.value);
         const p = parseFloat(price.value);
-        const mult = expMap[expSlider.value] * tabooMap[tabooSlider.value];
         
-        // Обновление меток с учетом языка
+        // Обновляем текстовые метки с учетом выбранного языка
         expLabel.innerText = expNames[expSlider.value][lang];
         tabooLabel.innerText = tabooNames[tabooSlider.value][lang];
+        
         fVal.innerText = f.toLocaleString();
         pVal.innerText = p;
         
-        // Расчет
-        const min = Math.round(f * p * 0.09 * mult);
-        const max = Math.round(f * p * 0.14 * mult);
+        // Математика: Подписчики * Цена
+        const totalBase = f * p;
+        
+        // Берем процент уровня и модификатор табу
+        const currentPercent = expMap[expSlider.value];
+        const tabooMod = tabooMap[tabooSlider.value];
+        
+        // Считаем итоговый диапазон
+        const min = Math.round(totalBase * currentPercent * tabooMod);
+        const max = Math.round(min * 1.10); // Вилка +10% для красоты
         
         resDisp.innerText = `$${min.toLocaleString()} - $${max.toLocaleString()}`;
     }
 
-    // Слушатели
+    // Слушатели изменений на всех ползунках
     [followers, price, expSlider, tabooSlider].forEach(el => el.addEventListener('input', calculate));
 
-    // Важно: пересчитываем, когда меняется язык (если у тебя есть функция setLanguage)
-    // Добавь вызов calculate() в свою функцию setLanguage на сайте
+    // Запуск при загрузке страницы
     calculate();
 </script>
 
