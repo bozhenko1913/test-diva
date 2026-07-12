@@ -860,4 +860,28 @@ section { padding: 120px 0; text-align: center; border-bottom: 1px solid rgba(25
         background: transparent;
         box-shadow: none;
     }
+}/* Стили для кнопок опыта и табу */
+.calc-level-selector { 
+    display: flex; 
+    gap: 5px; 
+    background: #111; 
+    padding: 5px; 
+    border-radius: 10px; 
+    border: 1px solid #333;
+    justify-content: center; /* Центрируем кнопки внутри контейнера */
+}
+.level-btn { 
+    background: transparent; 
+    border: none; 
+    color: #888; 
+    padding: 10px 15px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 11px; 
+    transition: 0.3s;
+}
+.level-btn.active { 
+    background: #d41d3d; 
+    color: #fff; 
+    font-weight: 700; 
 }
