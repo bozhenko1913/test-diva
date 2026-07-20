@@ -138,8 +138,9 @@
         .mobile-hero-img {
             display: none;
             width: 100%;
+            max-width: 100%;
             height: auto;
-            object-fit: cover;
+            margin: 0 auto 20px auto;
         }
 
         /* --- СЕКЦИЯ НАБОРА В ТОП-АГЕНТСТВА --- */
@@ -355,18 +356,26 @@
 
         @media(max-width: 768px) {
             main {
-                padding-top: 60px !important;
+                padding-top: 65px !important;
             }
             
-            /* Отображаем картинку на мобильных устройствах */
+            /* Отображаем картинку во всю ширину */
             .mobile-hero-img {
                 display: block !important;
-                margin-bottom: 10px;
             }
 
             .hero {
-                padding-top: 15px !important;
+                padding-top: 10px !important;
                 padding-bottom: 30px !important;
+            }
+
+            /* Колончатая структура: Картинка -> Текст -> Кнопки */
+            .hero-content {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                width: 100% !important;
             }
 
             .recruitment-box { padding: 30px 20px; }
@@ -449,10 +458,10 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
 
     <main style="padding-top: 80px;"> 
         <section class="hero" id="hero">
-            <!-- ПРЯМАЯ ВСТАВКА КАРТИНКИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ -->
-            <img src="bg2-mobile.jpg" alt="Diva Models" class="mobile-hero-img">
-
             <div class="container hero-content">
+                <!-- КАРТИНКА ВНУТРИ КОНТЕЙНЕРА, ЧТОБЫ БЫТЬ СТРОГО СВЕРХУ ТЕКСТА -->
+                <img src="bg2-mobile.jpg" alt="Diva Models" class="mobile-hero-img">
+
                 <div class="label lang" data-ru="WORLDWIDE AGENCY" data-ua="ВСЕСВІТНЯ АГЕНЦІЯ">WORLDWIDE AGENCY</div>
                 <h1 class="lang" data-ru="DIVA <span class='text-red'>MODELS</span>" data-ua="DIVA <span class='text-red'>MODELS</span>">
                     DIVA <span class="text-red">MODELS</span>
