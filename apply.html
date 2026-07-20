@@ -215,38 +215,35 @@
 
         .text-red { color: #d41d3d; }
 
-        /* === НАСТРОЙКИ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ === */
-        @media (max-width: 768px) {
-            main {
-                margin-top: 0;
-            }
-            .apply-section {
-                padding-top: 82vw;
-                padding-bottom: 40px;
-                background-image: url('bg-mobile.jpg');
-                background-position: top center;
-                background-repeat: no-repeat;
-                background-size: 100% auto;
-            }
-            .apply-box { 
-                padding: 20px; 
-                border: none; 
-                background: transparent; 
-                box-shadow: none; 
-            }
-            .nav-controls { gap: 10px; }
-            .btn-pill { padding: 8px 15px; font-size: 10px; }
-            .logo { font-size: 16px; }
-            .options-grid { gap: 8px; }
-            .option-btn label { font-size: 12px; padding: 10px 4px; }
-            .checkbox-item label { font-size: 12px; }
-            
-            .success-action-btns {
-                flex-direction: column;
-                gap: 12px !important;
-            }
-        }
-    </style>
+/* === НАСТРОЙКИ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ === */
+@media (max-width: 768px) {
+    main {
+        margin-top: 0;
+    }
+    .apply-section {
+        /* Увеличили отступ до 105vw — теперь текст начинается строго от красной линии */
+        padding-top: 105vw !important; 
+        padding-bottom: 40px;
+        background: url('bg-mobile.jpg') no-repeat top center / 100% auto !important;
+    }
+    .apply-box { 
+        padding: 20px; 
+        border: none; 
+        background: transparent !important; 
+        box-shadow: none; 
+    }
+    .nav-controls { gap: 10px; }
+    .btn-pill { padding: 8px 15px; font-size: 10px; }
+    .logo { font-size: 16px; }
+    .options-grid { gap: 8px; }
+    .option-btn label { font-size: 12px; padding: 10px 4px; }
+    .checkbox-item label { font-size: 12px; }
+    
+    .success-action-btns {
+        flex-direction: column;
+        gap: 12px !important;
+    }
+}
 
 <!-- Meta Pixel Code -->
 <script>
