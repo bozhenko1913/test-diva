@@ -30,17 +30,19 @@
             position: fixed;
             top: 0; left: 0; width: 100%;
             z-index: 1000;
-            background: rgba(5, 5, 5, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: 70px;
         }
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 0 20px;
             max-width: 1200px;
             margin: 0 auto;
+            height: 100%;
         }
         .logo {
             font-family: 'Syncopate', sans-serif;
@@ -75,13 +77,29 @@
         }
         .btn-pill:hover { background: #fff; color: #000; }
 
-        /* --- СТИЛИ ФОРМЫ --- */
+        /* --- ВЕРХНИЙ БАННЕР С КАРТИНКОЙ --- */
         main {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            margin-top: 80px;
+            flex: 1;
+            padding-top: 0 !important;
         }
+
+        .apply-hero-banner {
+            width: 100%;
+            padding-top: 70px; /* Выравнивание строго под высоту фиксированной шапки */
+            background-color: #050505;
+        }
+
+        .apply-hero-banner img {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- СТИЛИ ФОРМЫ --- */
         .apply-section {
-            width: 100%; padding: 40px 0;
+            width: 100%; 
+            padding: 40px 20px 60px;
             background: radial-gradient(circle at center, rgba(212, 29, 61, 0.05) 0%, transparent 70%);
         }
         .apply-box {
@@ -215,7 +233,7 @@
         }
         .btn-outline-custom:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
-        /* КНОПКА НАПИСАТЬ МЕНЕДЖЕРУ (ИДЕНТИЧНАЯ ПО ФОРМЕ, КРАСНАЯ) */
+        /* КНОПКА НАПИСАТЬ МЕНЕДЖЕРУ */
         .btn-red-custom {
             background: #d41d3d; border: 1px solid #d41d3d; color: #fff; padding: 15px; border-radius: 50px;
             font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase;
@@ -228,23 +246,26 @@
 
         /* === НАСТРОЙКИ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ === */
         @media (max-width: 768px) {
-            main {
-                margin-top: 0;
+            .apply-hero-banner img {
+                max-height: 220px;
             }
+
             .apply-section {
-                padding-top: 85vw !important;
+                padding-top: 20px !important;
                 padding-bottom: 40px;
-                background: url('bg-mobile.jpg') no-repeat top center / 100% auto !important;
             }
-            
-            /* Убираем фоновое фото и сбрасываем отступ ПОСЛЕ ОТПРАВКИ */
-            .apply-section.submitted {
-                padding-top: 120px !important;
-                background: radial-gradient(circle at center, rgba(212, 29, 61, 0.05) 0%, transparent 70%) !important;
+
+            /* Скрытие верхнего баннера при успешной отправке заявки */
+            body.submitted .apply-hero-banner {
+                display: none;
+            }
+
+            body.submitted .apply-section {
+                padding-top: 100px !important;
             }
 
             .apply-box { 
-                padding: 20px; 
+                padding: 20px 10px; 
                 border: none; 
                 background: transparent !important; 
                 box-shadow: none; 
@@ -300,6 +321,11 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
     </header>
 
     <main>
+        <!-- ВЕРХНИЙ БАННЕР С КАРТИНКОЙ -->
+        <div class="apply-hero-banner">
+            <img src="bg-mobile.jpg" alt="DIVA MODELS Banner">
+        </div>
+
         <section class="apply-section" id="apply">
             <div class="apply-box">
                 
@@ -404,7 +430,7 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
                     </form>
                 </div>
 
-                <!-- БЛОК УСПЕШНОЙ ОТПРАВКИ (ПОЯВЛЯЕТСЯ ПОСЛЕ ОТПРАВКИ) -->
+                <!-- БЛОК УСПЕШНОЙ ОТПРАВКИ -->
                 <div id="success-container" style="display: none; text-align: center;">
                     <div style="font-size: 50px; margin-bottom: 15px;">🔥</div>
                     <h2 class="section-title lang" 
@@ -502,10 +528,10 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
                         fbq('track', 'Lead'); 
                     }
 
-                    // Добавляем класс, убирающий фото и сбрасывающий отступ
-                    document.getElementById('apply').classList.add('submitted');
+                    // Переключаем класс body для адаптации шапки/картинки после отправки
+                    document.body.classList.add('submitted');
 
-                    // Скрываем форму и показываем окно успешной отправки
+                    // Скрываем форму и показываем экран успешной отправки
                     document.getElementById('form-container').style.display = 'none';
                     document.getElementById('success-container').style.display = 'block';
 
