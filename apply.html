@@ -206,12 +206,23 @@
         }
         .btn-primary:hover { background: #ff003c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,29,61,0.4); }
         
+        /* КНОПКА ПОСЕТИТЬ САЙТ */
         .btn-outline-custom {
             border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 15px; border-radius: 50px;
             font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase;
             font-family: 'Montserrat', sans-serif; text-decoration: none; text-align: center; background: transparent;
+            box-sizing: border-box;
         }
         .btn-outline-custom:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+        /* КНОПКА НАПИСАТЬ МЕНЕДЖЕРУ (ИДЕНТИЧНАЯ ПО ФОРМЕ, КРАСНАЯ) */
+        .btn-red-custom {
+            background: #d41d3d; border: 1px solid #d41d3d; color: #fff; padding: 15px; border-radius: 50px;
+            font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif; text-decoration: none; text-align: center;
+            box-sizing: border-box;
+        }
+        .btn-red-custom:hover { background: #ff003c; border-color: #ff003c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,29,61,0.4); }
 
         .text-red { color: #d41d3d; }
 
@@ -221,10 +232,17 @@
                 margin-top: 0;
             }
             .apply-section {
-                padding-top: 90vw !important; /* Текст начинается строго от красной линии */
+                padding-top: 105vw !important;
                 padding-bottom: 40px;
                 background: url('bg-mobile.jpg') no-repeat top center / 100% auto !important;
             }
+            
+            /* Убираем фоновое фото и сбрасываем отступ ПОСЛЕ ОТПРАВКИ */
+            .apply-section.submitted {
+                padding-top: 120px !important;
+                background: radial-gradient(circle at center, rgba(212, 29, 61, 0.05) 0%, transparent 70%) !important;
+            }
+
             .apply-box { 
                 padding: 20px; 
                 border: none; 
@@ -405,7 +423,7 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
 
                     <div class="success-action-btns" style="display: flex; gap: 15px; justify-content: center;">
                         <a href="index.html" class="btn-outline-custom lang" data-ru="Посетить сайт" data-ua="Відвідати сайт" style="flex: 1;">Посетить сайт</a>
-                        <a href="https://t.me/diva_modelss" target="_blank" class="btn-primary lang" data-ru="Написать менеджеру" data-ua="Написати менеджеру" style="flex: 1;">Написать менеджеру</a>
+                        <a href="https://t.me/diva_modelss" target="_blank" class="btn-red-custom lang" data-ru="Написать менеджеру" data-ua="Написати менеджеру" style="flex: 1;">Написать менеджеру</a>
                     </div>
                 </div>
 
@@ -484,7 +502,10 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
                         fbq('track', 'Lead'); 
                     }
 
-                    // Скрываем форму и показываем окно успешной отправки с двумя кнопками
+                    // Добавляем класс, убирающий фото и сбрасывающий отступ
+                    document.getElementById('apply').classList.add('submitted');
+
+                    // Скрываем форму и показываем окно успешной отправки
                     document.getElementById('form-container').style.display = 'none';
                     document.getElementById('success-container').style.display = 'block';
 
