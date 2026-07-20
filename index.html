@@ -345,24 +345,24 @@
             }
         }
 
-@media(max-width: 768px) {
+        @media(max-width: 768px) {
             main {
                 padding-top: 0 !important;
             }
             .hero {
-                /* Подключаем фото через явный относительный путь */
-                background-image: url('./bg-mobile.jpg') !important;
+                /* Указываем bg2-mobile.jpg */
+                background-image: url('./bg2-mobile.jpg') !important;
                 background-repeat: no-repeat !important;
                 background-position: top center !important;
                 background-size: 100% auto !important;
                 
-                /* Отступ сверху, чтобы текст начинался точно под красной линией */
+                /* Отступ сверху для начала текста под красной линией */
                 padding-top: 105vw !important; 
                 padding-bottom: 40px !important;
                 min-height: auto !important;
             }
 
-            /* Убираем темные фоновые градиенты, если они перекрывали фото */
+            /* Убираем лишние наложения свечения */
             .red-glow-bg {
                 display: none !important;
             }
