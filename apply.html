@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ЖЕЛЕЗОБЕТОННЫЙ ТЕМНЫЙ ФОН --- */
+        /* --- ТЕМНЫЙ ФОН --- */
         body {
             background-color: #050505 !important;
             color: #ffffff !important;
@@ -25,12 +25,12 @@
             min-height: 100vh;
         }
 
-        /* --- СТИЛИ ШАПКИ ДЛЯ ЭТОЙ СТРАНИЦЫ --- */
+        /* --- СТИЛИ ШАПКИ --- */
         header {
             position: fixed;
             top: 0; left: 0; width: 100%;
             z-index: 1000;
-            background: rgba(5, 5, 5, 0.9);
+            background: rgba(5, 5, 5, 0.7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -85,40 +85,166 @@
             background: radial-gradient(circle at center, rgba(212, 29, 61, 0.05) 0%, transparent 70%);
         }
         .apply-box {
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(15px);
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px;
             padding: 50px 60px; max-width: 650px; margin: 0 auto;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         .apply-form { display: flex; flex-direction: column; gap: 25px; }
         .input-group { position: relative; text-align: left; }
+        
         .input-group input {
             width: 100%; padding: 15px 0; font-size: 16px; color: #fff;
             background: transparent; border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             outline: none; transition: 0.3s ease; font-family: 'Montserrat', sans-serif;
         }
+
         .input-group label {
             position: absolute; top: 15px; left: 0; font-size: 16px; color: rgba(255, 255, 255, 0.5);
-            pointer-events: none; transition: 0.3s ease; font-family: 'Montserrat', sans-serif;
+            pointer-events: none; transition: 0.3s ease; font-family: 'Montserrat', sans-serif; font-weight: 400;
         }
+
         .input-group input:focus ~ label, .input-group input:not(:placeholder-shown) ~ label {
             top: -12px; font-size: 12px; color: #d41d3d;
         }
-        .input-group input:focus { border-bottom-color: #d41d3d; }
+
+        .input-group input:focus { 
+            border-bottom-color: #d41d3d; 
+        }
+
+        /* --- СТИЛИ ДЛЯ ЗАГОЛОВКОВ ВОПРОСОВ --- */
+        .radio-field-title {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .options-grid {
+            display: flex;
+            gap: 10px;
+        }
+
+        .option-btn {
+            flex: 1;
+            position: relative;
+        }
+
+        .option-btn input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .option-btn label {
+            display: block;
+            text-align: center;
+            padding: 12px 6px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .option-btn input[type="radio"]:checked + label {
+            background: rgba(212, 29, 61, 0.15);
+            border-color: #d41d3d;
+            color: #d41d3d;
+            box-shadow: 0 0 15px rgba(212, 29, 61, 0.2);
+        }
+
+        .option-btn label:hover {
+            border-color: rgba(212, 29, 61, 0.5);
+        }
+
+        /* --- СТИЛИ ДЛЯ ЧЕКБОКСОВ (СОГЛАШЕНИЯ) --- */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+            margin-top: 5px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            accent-color: #d41d3d;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
+            cursor: pointer;
+        }
         
         .btn-primary {
             background: #d41d3d; color: #fff; padding: 15px; border: none; border-radius: 50px;
             font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif; text-decoration: none; text-align: center;
         }
         .btn-primary:hover { background: #ff003c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,29,61,0.4); }
+        
+        .btn-outline-custom {
+            border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 15px; border-radius: 50px;
+            font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif; text-decoration: none; text-align: center; background: transparent;
+        }
+        .btn-outline-custom:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
         .text-red { color: #d41d3d; }
 
-        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
+        /* === НАСТРОЙКИ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ === */
         @media (max-width: 768px) {
-            .apply-box { padding: 30px 20px; border: none; background: transparent; box-shadow: none; }
+            main {
+                margin-top: 0;
+            }
+            .apply-section {
+                padding-top: 82vw;
+                padding-bottom: 40px;
+                background-image: url('bg-mobile.jpg');
+                background-position: top center;
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+            }
+            .apply-box { 
+                padding: 20px; 
+                border: none; 
+                background: transparent; 
+                box-shadow: none; 
+            }
             .nav-controls { gap: 10px; }
             .btn-pill { padding: 8px 15px; font-size: 10px; }
             .logo { font-size: 16px; }
+            .options-grid { gap: 8px; }
+            .option-btn label { font-size: 12px; padding: 10px 4px; }
+            .checkbox-item label { font-size: 12px; }
+            
+            .success-action-btns {
+                flex-direction: column;
+                gap: 12px !important;
+            }
         }
     </style>
 
@@ -161,38 +287,131 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
     <main>
         <section class="apply-section" id="apply">
             <div class="apply-box">
-                <div class="label lang" data-ru="ПРИСОЕДИНИТЬСЯ" data-ua="ПРИЄДНАТИСЯ" style="text-align: center; color: var(--gray-text); font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">ПРИСОЕДИНИТЬСЯ</div>
-                <h2 class="section-title lang" 
-                    data-ru="СТАТЬ <span class='text-red'>МОДЕЛЬЮ</span>" 
-                    data-ua="СТАТИ <span class='text-red'>МОДЕЛЛЮ</span>" 
-                    style="text-align: center; font-size: 28px; margin-bottom: 15px;">
-                    СТАТЬ <span class="text-red">МОДЕЛЬЮ</span>
-                </h2>
                 
-                <p class="lang" style="text-align: center; color: #b3b3b3; margin-bottom: 40px; font-size: 15px; line-height: 1.6;"
-                   data-ru="Оставьте свои данные, и наш менеджер свяжется с вами в Telegram для обсуждения условий." 
-                   data-ua="Залиште свої дані, і наш менеджер зв'яжеться з вами в Telegram для обговорення умов.">
-                   Оставьте свои данные, и наш менеджер свяжется с вами в Telegram для обсуждения условий.
-                </p>
+                <!-- БЛОК С ФОРМОЙ -->
+                <div id="form-container">
+                    <div class="label lang" data-ru="ПРИСОЕДИНИТЬСЯ" data-ua="ПРИЄДНАТИСЯ" style="text-align: center; color: #888888; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">ПРИСОЕДИНИТЬСЯ</div>
+                    <h2 class="section-title lang" 
+                        data-ru="СТАТЬ <span class='text-red'>МОДЕЛЬЮ</span>" 
+                        data-ua="СТАТИ <span class='text-red'>МОДЕЛЛЮ</span>" 
+                        style="text-align: center; font-size: 28px; margin-bottom: 15px;">
+                        СТАТЬ <span class="text-red">МОДЕЛЬЮ</span>
+                    </h2>
+                    
+                    <p class="lang" style="text-align: center; color: #b3b3b3; margin-bottom: 40px; font-size: 15px; line-height: 1.6;"
+                       data-ru="Оставьте свои данные, и наш менеджер свяжется с вами в Telegram для обсуждения условий." 
+                       data-ua="Залиште свої дані, і наш менеджер зв'яжеться з вами в Telegram для обговорення умов.">
+                       Оставьте свои данные, и наш менеджер свяжется с вами в Telegram для обсуждения условий.
+                    </p>
 
-                <form action="#" method="POST" class="apply-form" id="tg-form">
-                    <div class="input-group">
-                        <input type="text" id="model_name" required placeholder=" ">
-                        <label for="model_name" class="lang" data-ru="Ваше имя" data-ua="Ваше ім'я">Ваше имя</label>
+                    <form action="#" method="POST" class="apply-form" id="tg-form" autocomplete="off">
+                        <div class="input-group">
+                            <input type="text" id="model_name" required placeholder=" " autocomplete="off">
+                            <label for="model_name" class="lang" data-ru="Ваше имя" data-ua="Ваше ім'я">Ваше имя</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="tel" id="model_phone" required placeholder=" " autocomplete="off">
+                            <label for="model_phone" class="lang" data-ru="Номер телефона" data-ua="Номер телефону">Номер телефона</label>
+                        </div>
+                          
+                        <div class="input-group">
+                            <input type="text" id="model_tg" required placeholder=" " autocomplete="off">
+                            <label for="model_tg" class="lang" data-ru="Ваш Telegram (@username)" data-ua="Ваш Telegram (@username)">Ваш Telegram (@username)</label>
+                        </div>
+
+                        <!-- ПОЛЕ: Возраст -->
+                        <div class="radio-group-container" style="text-align: left;">
+                            <span class="radio-field-title lang" data-ru="Сколько вам лет?" data-ua="Скільки вам років?">Сколько вам лет?</span>
+                            <div class="options-grid">
+                                <div class="option-btn">
+                                    <input type="radio" id="age_1" name="model_age" value="18-22" checked>
+                                    <label for="age_1">18-22</label>
+                                </div>
+                                <div class="option-btn">
+                                    <input type="radio" id="age_2" name="model_age" value="23-26">
+                                    <label for="age_2">23-26</label>
+                                </div>
+                                <div class="option-btn">
+                                    <input type="radio" id="age_3" name="model_age" value="26-30">
+                                    <label for="age_3">26-30</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ПОЛЕ: Опыт на OnlyFans -->
+                        <div class="radio-group-container" style="text-align: left;">
+                            <span class="radio-field-title lang" data-ru="Ваш опыт на OnlyFans:" data-ua="Ваш досвід на OnlyFans:">Ваш опыт на OnlyFans:</span>
+                            <div class="options-grid">
+                                <div class="option-btn">
+                                    <input type="radio" id="exp_no" name="model_exp" value="Нет" checked>
+                                    <label for="exp_no" class="lang" data-ru="Нет" data-ua="Ні">Нет</label>
+                                </div>
+                                <div class="option-btn">
+                                    <input type="radio" id="exp_model" name="model_exp" value="Модель">
+                                    <label for="exp_model" class="lang" data-ru="Модель" data-ua="Модель">Модель</label>
+                                </div>
+                                <div class="option-btn">
+                                    <input type="radio" id="exp_operator" name="model_exp" value="Оператор">
+                                    <label for="exp_operator" class="lang" data-ru="Оператор" data-ua="Оператор">Оператор</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ПОЛЕ: Контент 18+ -->
+                        <div class="radio-group-container" style="text-align: left;">
+                            <span class="radio-field-title lang" data-ru="Готовы ли вы снимать контент 18+?" data-ua="Чи готові ви знімати контент 18+?">Готовы ли вы снимать контент 18+?</span>
+                            <div class="options-grid">
+                                <div class="option-btn">
+                                    <input type="radio" id="opt_yes" name="model_18plus" value="Да" checked>
+                                    <label for="opt_yes" class="lang" data-ru="Да" data-ua="Так">Да</label>
+                                </div>
+                                <div class="option-btn">
+                                    <input type="radio" id="opt_no" name="model_18plus" value="Нет">
+                                    <label for="opt_no" class="lang" data-ru="Нет" data-ua="Ні">Нет</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ОБЯЗАТЕЛЬНЫЕ ЧЕКБОКСЫ -->
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="check_age" required>
+                                <label for="check_age" class="lang" data-ru="Я подтверждаю, что мне 18+" data-ua="Я підтверджую, що мені 18+">Я подтверждаю, что мне 18+</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="check_agree" required>
+                                <label for="check_agree" class="lang" data-ru="Я согласна, что Diva Models может обработать данные для разбора и связи со мной." data-ua="Я погоджуюся, що Diva Models може обробити дані для розбору та зв'язку зі мною.">Я согласна, что Diva Models может обработать данные для разбора и связи со мной.</label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary lang" style="width: 100%; margin-top: 10px;" data-ru="Отправить заявку" data-ua="Відправити заявку">Отправить заявку</button>
+                    </form>
+                </div>
+
+                <!-- БЛОК УСПЕШНОЙ ОТПРАВКИ (ПОЯВЛЯЕТСЯ ПОСЛЕ ОТПРАВКИ) -->
+                <div id="success-container" style="display: none; text-align: center;">
+                    <div style="font-size: 50px; margin-bottom: 15px;">🔥</div>
+                    <h2 class="section-title lang" 
+                        data-ru="ЗАЯВКА <span class='text-red'>ОТПРАВЛЕНА!</span>" 
+                        data-ua="ЗАЯВКА <span class='text-red'>ВІДПРАВЛЕНА!</span>" 
+                        style="font-size: 26px; margin-bottom: 20px;">
+                        ЗАЯВКА <span class="text-red">ОТПРАВЛЕНА!</span>
+                    </h2>
+                    
+                    <p class="lang" 
+                       data-ru="Мы связываемся с кандидатами в <b>Telegram</b>. Пожалуйста, периодически проверяйте личные сообщения или <b>напишите нашему менеджеру первыми</b>, чтобы получить ответ как можно быстрее!" 
+                       data-ua="Ми зв'язуємося з кандидатами в <b>Telegram</b>. Будь ласка, періодично перевіряйте особисті повідомлення або <b>напишіть нашому менеджеру першими</b>, щоб отримати відповідь якнайшвидше!" 
+                       style="color: #e0e0e0; font-size: 15px; line-height: 1.7; margin-bottom: 35px;">
+                       Мы связываемся с кандидатами в <b>Telegram</b>. Пожалуйста, периодически проверяйте личные сообщения или <b>напишите нашему менеджеру первыми</b>, чтобы получить ответ как можно быстрее!
+                    </p>
+
+                    <div class="success-action-btns" style="display: flex; gap: 15px; justify-content: center;">
+                        <a href="index.html" class="btn-outline-custom lang" data-ru="Посетить сайт" data-ua="Відвідати сайт" style="flex: 1;">Посетить сайт</a>
+                        <a href="https://t.me/diva_modelss" target="_blank" class="btn-primary lang" data-ru="Написать менеджеру" data-ua="Написати менеджеру" style="flex: 1;">Написать менеджеру</a>
                     </div>
+                </div>
 
-                    <div class="input-group">
-                        <input type="tel" id="model_phone" required placeholder=" ">
-                        <label for="model_phone" class="lang" data-ru="Номер телефона" data-ua="Номер телефону">Номер телефона</label>
-                    </div>
-
-                    <div class="input-group">
-                        <input type="text" id="model_tg" required placeholder=" ">
-                        <label for="model_tg" class="lang" data-ru="Ваш Telegram (@username)" data-ua="Ваш Telegram (@username)">Ваш Telegram (@username)</label>
-                    </div>
-
-                    <button type="submit" class="btn-primary lang" style="width: 100%; margin-top: 10px;" data-ru="Отправить заявку" data-ua="Відправити заявку">Отправить заявку</button>
-                </form>
             </div>
         </section>
     </main>
@@ -208,10 +427,12 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
         // Переключение языков
         function setLanguage(lang) {
             localStorage.setItem('diva_lang', lang);
+            
             document.querySelectorAll('.lang').forEach(el => {
                 const text = el.getAttribute(`data-${lang}`);
                 if (text) el.innerHTML = text;
             });
+
             const btnRu = document.getElementById('btn-ru');
             const btnUa = document.getElementById('btn-ua');
             if (lang === 'ru') {
@@ -226,20 +447,34 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
         document.getElementById('tg-form').addEventListener('submit', function(e) {
             e.preventDefault(); 
 
-            // ВАШИ ДАННЫЕ УЖЕ ВСТАВЛЕНЫ
             const TOKEN = "7216276855:AAHiVB9OTH9nmmyHQVixHuI25P5iyHu6wds"; 
             const CHAT_ID = "-1002276800723";
-            
             const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-            const name = document.getElementById('model_name').value;
-            const phone = document.getElementById('model_phone').value;
-            const tg = document.getElementById('model_tg').value;
+            
+            const name = document.getElementById('model_name').value.trim();
+            const phone = document.getElementById('model_phone').value.trim();
+            let tg = document.getElementById('model_tg').value.trim();
+            const age = document.querySelector('input[name="model_age"]:checked')?.value || 'Не указано';
+            const exp = document.querySelector('input[name="model_exp"]:checked')?.value || 'Не указано';
+            const exp18 = document.querySelector('input[name="model_18plus"]:checked')?.value || 'Не указано';
 
-            let message = `🔥 <b>Новая заявка (DIVA MODELS)</b>\n\n👤 <b>Имя:</b> ${name}\n📞 <b>Телефон:</b> ${phone}\n✈️ <b>Telegram:</b> ${tg}`;
+            if (tg && !tg.startsWith('@')) {
+                tg = '@' + tg;
+            }
+
+            let message = `🔥 <b>Новая заявка (DIVA MODELS)</b>\n\n`;
+            message += `👤 <b>Имя:</b> ${name}\n`;
+            message += `📞 <b>Телефон:</b> ${phone}\n`;
+            message += `✈️ <b>Telegram:</b> ${tg}\n`;
+            message += `🎂 <b>Возраст:</b> ${age}\n`;
+            message += `💼 <b>Опыт на OnlyFans:</b> ${exp}\n`;
+            message += `🔞 <b>Контент 18+:</b> ${exp18}`;
+
             const btn = this.querySelector('button');
             const originalBtnText = btn.innerText;
             
             btn.innerText = "Отправка..."; 
+            btn.disabled = true;
 
             fetch(URI_API, {
                 method: 'POST',
@@ -248,28 +483,27 @@ src="https://www.facebook.com/tr?id=3420745024723839&ev=PageView&noscript=1"
             })
             .then(res => {
                 if (res.ok) {
-                    btn.innerText = "✅ Заявка отправлена!";
-                    btn.style.background = "#28a745"; 
-                    btn.style.color = "#fff";
-                    btn.style.boxShadow = "none";
-                    this.reset(); 
-                    
                     if (typeof fbq === 'function') {
                         fbq('track', 'Lead'); 
                     }
-                    
-                    setTimeout(() => {
-                        window.location.href = "index.html"; 
-                    }, 2000);
+
+                    // Скрываем форму и показываем окно успешной отправки с двумя кнопками
+                    document.getElementById('form-container').style.display = 'none';
+                    document.getElementById('success-container').style.display = 'block';
+
+                    // Прокручиваем вверх к сообщению
+                    document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
 
                 } else {
                     alert("Ошибка отправки. Проверьте настройки бота.");
                     btn.innerText = originalBtnText;
+                    btn.disabled = false;
                 }
             })
             .catch(err => {
                 alert("Ошибка сети.");
                 btn.innerText = originalBtnText;
+                btn.disabled = false;
             });
         });
     </script>
